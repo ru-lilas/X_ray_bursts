@@ -5,16 +5,18 @@
   - rising time ~10s
   - decay time ~10s - a few min
   - peak luminosity 
-    - more information
+    - [ ] **more information**
+    - [ ] derive Eddington luminosity
 - spectrum
   - almost blackbody spectrum
     - blackbody temperature ~10^7 K(Swank et al. 1977) --> soft X-ray?
-      - newly imformation
+      - [ ]**add recent information**
     - How about the time evolution: the dependence of blackbody temperature on time?
-      - whether increase or decrease?
+      - whether increase or decrease? (maybe increase)
       - How rate?
 - burst source
-  - neutron star binary(low mass binary)
+  - Low Mass X-ray Binary (LMXB)
+    - neutron star and low mass star
   - X-ray bursts occur at neutron star surface.
     - Where is 'surface'?
 
@@ -53,6 +55,9 @@
 8. rp-process (Wallace and Woosley 1981)
 9. Using more realistic nuclear reaction network (Woosley et al. 2004)
 
+**Research recent study!**
+
 ## inportance of type 1 X-ray burst
-restrict EoS(MR relation)
-multi wavelength information
+- restrict EoS(MR relation)
+- multi wavelength information
+- 
