@@ -60,4 +60,3 @@
 ## inportance of type 1 X-ray burst
 - restrict EoS(MR relation)
 - multi wavelength information
-- 
