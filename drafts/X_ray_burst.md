@@ -6,11 +6,15 @@
   - decay time ~10s - a few min
   - peak luminosity 
     - [ ] **more information**
-    - [ ] derive Eddington luminosity
+    - [x] derive Eddington luminosity
+      - 10^38 erg s-1 per Solar mass
+  - recurrence
+    - **Few** X-ray bursters which have regular recurrence time exist. (Takeda et al.2024)
+      - These bursters are called *clocked burstrer*.
 - spectrum
   - almost blackbody spectrum
     - blackbody temperature ~10^7 K(Swank et al. 1977) --> soft X-ray?
-      - [ ]**add recent information**
+      - [ ] **add recent information**
     - How about the time evolution: the dependence of blackbody temperature on time?
       - whether increase or decrease? (maybe increase)
       - How rate?
@@ -19,6 +23,9 @@
     - neutron star and low mass star
   - X-ray bursts occur at neutron star surface.
     - Where is 'surface'?
+- neuclear burning
+  - He combining --> Fe, proton added ?
+  - A=64 (Herrera et al. 2024) --> see Fisker et al. 2008
 
 ## How type 1 X-ray bursts occur?
 - It is said that thermonuclear burning makes X-ray burst.
@@ -40,6 +47,7 @@
 - It is said that matters falling on NS rapidly spread across the surface by latial pressure gradients
   - How such strong pressure gradients work?
 - It is said that lightcurves depend on what is accreting matter(donor composition).
+  - Solar metallicity? (Heger et al. 2007)
   - pure He
   - H/He mix
 - What is produced after He burning?
@@ -53,10 +61,11 @@
 6. Reproducing lightcurve (helium shell burning) (Joss 1978)
 7. Role of hydrogen shell burning (Fujimoto et al. 1981)
 8. rp-process (Wallace and Woosley 1981)
-9. Using more realistic nuclear reaction network (Woosley et al. 2004)
+9. multi zone model using more realistic nuclear reaction network (Woosley et al. 2004)
 
 **Research recent study!**
 
 ## inportance of type 1 X-ray burst
 - restrict EoS(MR relation)
 - multi wavelength information
+- influence on the metallicity in our galaxy
