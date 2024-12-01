@@ -1,0 +1,43 @@
+\documentclass{ltjsarticle}
+%==============================================================================%
+\usepackage{amsmath,amssymb}
+% \let\qty\relax
+\usepackage{bxpapersize} %用紙サイズを一致させるパッケージ
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[unicode=true]{hyperref}
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs}
+% \usepackage{physics}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{empheq}
+\usepackage{titleps}
+\newpagestyle{main}{
+  \sethead[][][]
+    {}{}{}
+  \setfoot[][\thepage][]
+    {}{\thepage}{}
+}
+\pagestyle{main}
+%==============================================================================%
+\begin{document}
+  % \title{Assignment on 2024-10-29}
+  % \author{KUMADA Ryota (C4SM3002)}
+  % \date{}
+  % \maketitle
+%------------------------------------------------------------------------------%
+\section{電波放射するまでの流れ}
+\begin{enumerate}
+  \item X--ray burstでshockが形成される
+  \item shockが外側の物質を加熱する
+\end{enumerate}
+
+\section{見積もり}
+ejectaの質量$M_\mathrm{ej}$は, recurrence timeの間にaccretionで落ちてきた質量の$\eta$倍に等しいと見積もってみる。
+accretion rateはEddington accretion rate$\dot{M}_{\mathrm{Edd}}$に等しいと仮定する。ここで, $\dot{M}_{\mathrm{Edd}}$はEddington luminosity:
+\begin{equation}
+  L_\mathrm{Edd} \approx \SI{e38}{erg/s}\left( \frac{M_{\mathrm{NS}}}{M_\odot} \right),
+\end{equation}
+
+\end{document}

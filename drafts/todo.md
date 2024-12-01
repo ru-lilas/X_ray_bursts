@@ -31,3 +31,16 @@
 5. 電子の分布はpower lawに従うとしよう dN/d gamma ~ C gamma^{-p} (gamma_{min} < gamma < gamma_{max}) L_sh * tau ~ epsilon_e int{dN/d gamma}gamma m c^2 d gamma <-- このしきからC出てくる
 6. M_{ej}, p, epsilon_{B}, epsilon_{e}はparameter
    - M_{ej}はrecurrence timeの間に降着してきたmassのeta倍が飛んでいくとしてみる
+7. 無衝突衝撃波を仮定したときに得られる電子のエネルギー(Lorentz factor)がわかれば, シンクロトロン放射のspectrumも得られる(ほんとに?)
+
+1. X-ray burstからどのようにしてshockが形成されるか
+   - shockはどれくらいの速さ？
+2. shockが外側の物質を加熱する
+   - 外側ってどこ？
+   - envelope?
+3. X-ray burstが起きてから電波が立ち上がるまでの時間は~3min
+   - shockによる加熱は3min以内に完了しなければならない
+4. 加熱されたelectronが相対論的に運動-->シンクロトロン放射
+   - shock自身が放射するわけではない？
+5. 電波はX-ray burstから~10minで落ちる
+   - シンクロトロン放射している電子は~10min程度で冷却されなければならない
