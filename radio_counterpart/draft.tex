@@ -1,0 +1,237 @@
+\documentclass{ltjsarticle}
+%==============================================================================%
+\usepackage{amsmath,amssymb}
+\usepackage{bxpapersize} %用紙サイズを一致させるパッケージ
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[unicode=true]{hyperref}
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs}
+\usepackage{siunitx, letltxmacro}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\LetLtxMacro{\svqty}{\qty}
+\usepackage{physics}
+\LetLtxMacro{\qty}{\svqty}
+\usepackage{booktabs}
+\usepackage{empheq}
+\usepackage{titleps}
+\newpagestyle{main}{
+  \sethead[][][]
+    {}{}{}
+  \setfoot[][\thepage][]
+    {}{\thepage}{}
+}
+\pagestyle{main}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+%==============================================================================%
+\begin{document}
+  % \title{Assignment on 2024-10-29}
+  % \author{KUMADA Ryota (C4SM3002)}
+  % \date{}
+  % \maketitle
+%------------------------------------------------------------------------------%
+% \section{電波放射するまでの流れ}
+% \begin{enumerate}
+%   \item X--ray burstでshockが形成される
+%   \item shockが外側の物質を加熱する
+% \end{enumerate}
+
+\section{Accretion rateとejecta mass}
+shock ejectaの質量$M_\mathrm{ej}$は, recurrence time \( t_\mathrm{rec} \approx \SI{200}{min} \)の間に降着する質量の$\eta$倍に等しいとする. 
+accretion rateはEddington accretion rate $\dot{M}_{\mathrm{Edd}}$と仮定する.
+ここで, $\dot{M}_{\mathrm{Edd}}$はEddington luminosity:
+\begin{equation}
+  L_\mathrm{Edd} \approx \SI{e38}{erg/s}\left( \frac{M}{M_\odot} \right)
+\end{equation}
+と, 輻射への変換効率$\epsilon$を用いて
+\begin{equation}
+  \dot{M}_{\mathrm{Edd}} = \frac{L_\mathrm{Edd}}{\epsilon c^2}
+  =
+  \SI{1.1e17}{g/s}~
+  \left( \frac{\epsilon}{0.1} \right)^{-1}
+  \left( \frac{M}{M_\odot} \right)
+\end{equation}
+と表せる. よって
+\begin{equation}
+  M_\mathrm{ej}
+  =
+  \eta\dot{M}_\mathrm{Edd} t_\mathrm{rec}
+  =
+  \SI{1.3e21}{g}~\eta
+  \left( \frac{t_\mathrm{rec}}{\SI{200}{min}} \right)
+  \left( \frac{\epsilon}{0.1} \right)
+  \left( \frac{M}{M_\odot} \right)
+\end{equation}
+
+\section{電波立ち上がり時のshock radius}
+X--ray burstの瞬間に\(t=0\)にshockが立ち, \(v_\mathrm{sh} = 0.3c\)の速さで走ると仮定する.
+観測によれば, X--ray burstが起きてから電波が立ち上がるまでの時間は\( t_\mathrm{rise} \approx \SI{3}{min} \)なので
+\begin{equation}
+  r_\mathrm{sh} = v_\mathrm{sh}t_\mathrm{rise} 
+  =
+  \SI{1.6e12}{cm}~\left(\frac{v_\mathrm{sh}}{0.3c}\right)\left( \frac{t_\mathrm{rise}}{\SI{3}{min}} \right)
+  =
+  \SI{0.11}{AU}~\left(\frac{v_\mathrm{sh}}{0.3c}\right)\left( \frac{t_\mathrm{rise}}{\SI{3}{min}} \right)
+\end{equation}
+
+\section{磁場の強さ}
+collisionless--shockはそのエネルギーの一部を磁場へ渡す. 変換効率を$\epsilon_B$とすると
+\begin{equation}
+  \epsilon_\mathrm{B}\frac{M_\mathrm{ej}v^2_\mathrm{sh}/2}{4\pi r^2_\mathrm{sh}v_\mathrm{sh}\tau}
+  =
+  \frac{B^2}{8\pi}
+\end{equation}
+ここで\( \tau \approx \SI{10}{min} \)はX--ray burstが起きてから電波が減衰するまでの時間である.
+$B$について解くと
+\begin{empheq}{align}
+  B^2
+  &=
+  \epsilon_B\frac{M_\mathrm{ej}v_\mathrm{sh}}{r^2_\mathrm{sh}\tau}
+  =
+  \eta\epsilon_B
+  \frac{\dot{M}_\mathrm{Edd}t_\mathrm{rec}}{v_\mathrm{sh} t^2_\mathrm{rise}\tau}\\
+  &\approx
+  \SI{7.6e3}{erg.cm^{-3}}~
+  \eta\epsilon_\mathrm{B}\left( \frac{\epsilon}{0.1} \right) \left( \frac{M}{M_\odot} \right)
+  \left( \frac{t_\mathrm{rec}}{\SI{200}{min}} \right)
+  \left( \frac{v_\mathrm{sh}}{0.3c} \right)^{-1}
+  \left( \frac{t_\mathrm{rise}}{\SI{3}{min}} \right)^{-2}
+  \left( \frac{\tau}{\SI{10}{min}} \right)
+\end{empheq}
+\begin{equation}
+  B
+  \approx
+  \SI{87}{G}~
+  \sqrt{\eta\epsilon_\mathrm{B}}
+  \left( \frac{\epsilon}{0.1} \right)^{1/2}
+  \left( \frac{M}{M_\odot} \right)^{1/2}
+  \left( \frac{t_\mathrm{rec}}{\SI{200}{min}} \right)^{1/2}
+  \left( \frac{v_\mathrm{sh}}{0.3c} \right)^{-1/2}
+  \left( \frac{t_\mathrm{rise}}{\SI{3}{min}} \right)^{-1}
+  \left( \frac{\tau}{\SI{10}{min}} \right)^{1/2}
+\end{equation}
+
+\section{周辺ガスの密度}
+\( \tau \approx \SI{10}{min} \)の間にshockが掃いた領域にあるガスの総質量は$M_\mathrm{ej}$に等しいと仮定する. すなわち
+\begin{equation}
+  4\pi r^2_\mathrm{sh}\rho_\mathrm{amb}v_\mathrm{sh}\tau = M_\mathrm{ej}
+\end{equation}
+$\rho_\mathrm{amb}$は周辺ガスの質量密度である. $\rho_\mathrm{amb}$について解くと
+\begin{empheq}{align}
+  \rho_\mathrm{amb}
+  &=
+  \frac{M_\mathrm{ej}}{4\pi r^2_\mathrm{sh}v_\mathrm{sh}\tau}\\
+  &\approx
+  \SI{7.5e-18}{g.cm^{-3}}
+  \left( \frac{\epsilon}{0.1} \right)
+  \left( \frac{M}{M_\odot} \right)
+  \left( \frac{t_\mathrm{rec}}{\SI{200}{min}} \right)
+  \left( \frac{v_\mathrm{sh}}{0.3c} \right)^{-3}
+  \left( \frac{t_\mathrm{rise}}{\SI{3}{min}} \right)^{-2}
+  \left( \frac{\tau}{\SI{10}{min}} \right)^{-1}
+\end{empheq}
+
+\section{Power--lawの比例係数}
+電子分布はpower lawに従うとする.
+\begin{equation}
+  \dv{N}{\gamma} = C\gamma^{-p}\quad(\text{for}\;\gamma_\mathrm{min} < \gamma < \gamma_\mathrm{max})
+\end{equation}
+shockはそのエネルギーの一部を周囲の電子へ受け渡す. 効率を$\epsilon_\mathrm{e}$とおくと
+\begin{equation}
+  \epsilon_\mathrm{e} \frac{M_\mathrm{ej}}{2}v^2_\mathrm{sh}
+  =
+  \int_{\gamma_\mathrm{min}}^{\gamma_\mathrm{max}} \gamma m_\mathrm{e}c^2 \dv{N}{\gamma}\dd{\gamma}
+  =
+  m_\mathrm{e}c^2 \frac{C}{2-p}
+  \left[ \gamma^{2-p} \right]_{\gamma_\mathrm{min}}^{\gamma_\mathrm{max}}
+\end{equation}
+となる. $C$について解くと
+\begin{empheq}{align}
+  C
+  &=
+  \epsilon_\mathrm{e} \frac{M_\mathrm{ej}v^2_\mathrm{sh}}{2m_\mathrm{e}c^2}
+  (2-p) \left( \gamma_\mathrm{max}^{2-p} - \gamma_\mathrm{min}^{2-p} \right)^{-1}\\
+  &=
+  \num{6.6e46}\eta\epsilon_\mathrm{e}~
+  (2-p) \left( \gamma_\mathrm{max}^{2-p} - \gamma_\mathrm{min}^{2-p} \right)^{-1}
+  \left( \frac{\dot{M}}{\dot{M}_\mathrm{Edd}} \right)
+  \left( \frac{t_\mathrm{rec}}{\SI{200}{min}} \right)
+  \left( \frac{v_\mathrm{sh}}{0.3c} \right)^2
+\end{empheq}
+
+shockで加速される電子のエネルギー範囲($\gamma_\mathrm{min},\,\gamma_\mathrm{max}$)が
+分かれば, $C$の値を見積もることができる.
+
+\section{放射電子の最小エネルギー}
+Circumstellar mediumはshockからエネルギーを受け取り熱化される. 電子の熱エネルギー$kT_e$が, $v_\mathrm{sh}$で走る電子の運動エネルギーに等しいと仮定すると
+\begin{equation}
+  kT_e
+  \approx \frac{m_e}{2}v_\mathrm{sh}^2
+  \approx 0.045 m_e c^2 \left( \frac{v_\mathrm{sh}}{0.3c} \right)^2
+\end{equation}
+
+CSMが電子と陽子のみから構成されていると仮定する. 陽子の熱化についても電子と同様に考えると,
+各々のLorentz factorはいずれも
+\begin{equation}
+  \gamma_\mathrm{th} = \frac{kT_i}{m_i c^2} \approx 0.045\quad (i = \mathrm{e,\,p})
+\end{equation}
+となる.
+
+熱化された陽子と電子とが互いにエネルギーをやりとりできるのであれば,
+電子が陽子の熱エネルギーの一部を受け取れるはずである.
+電子が受け取る, 陽子の熱エネルギーの割合を$\zeta$とすると
+\begin{empheq}{align}
+  \gamma_e 
+  &=
+  \frac{1}{m_e c^2} ( kT_e + \zeta kT_p ) \\
+  &=
+  0.045 \left( 1 + \zeta\frac{m_p}{m_e} \right)
+  \left( \frac{v_\mathrm{sh}}{0.3c} \right)^2 \\
+  &\approx
+  45\zeta 
+  \left( \frac{v_\mathrm{sh}}{0.3c} \right)^2
+  \;(\text{using}\; m_p/m_e \approx 10^3) \\
+  % &=
+  % 18\left( \frac{\zeta}{0.4} \right)\left( \frac{v_\mathrm{sh}}{0.3c} \right)^2
+\end{empheq}
+となる. 
+% $\zeta$の値はKashiyama et al.(2018)より孫引き. (親はPark et al.(2015)?)
+
+\section{シンクロトロン放射}
+$\gamma_e$のLorenz factorをもつ電子からのシンクロトロン放射を考える.
+放射の典型的な振動数$\nu_e$は
+\begin{equation}
+  \nu_e
+  = \gamma_e^3\nu_B\sin\alpha
+  = \frac{\gamma_e^2eB}{2\pi m_e c} \sin\alpha
+\end{equation}
+である(Rybicki \& Lightman (1979)).
+ここで$\nu_B$はサイクロトロン振動数, $\alpha$はピッチ角である.
+磁場がランダムな方向を向いていると仮定し, $\sin\alpha$の平均をとると
+\begin{equation}
+  \int_0^{\pi/2} \sin\alpha \dd{\alpha} = 1
+\end{equation}
+ゆえ
+\begin{equation}
+  \nu_e = \frac{\gamma_e^2eB}{2\pi m_e c}
+\end{equation}
+値を代入すると
+\begin{equation}
+  \nu_e
+  \approx
+  \SI{495}{GHz}~
+  \zeta\sqrt{\eta\epsilon_\mathrm{B}}
+  % \left( \frac{\zeta}{0.4} \right)
+  \left( \frac{\epsilon}{0.1} \right)^{1/2}
+  \left( \frac{M}{M_\odot} \right)^{1/2}
+  \left( \frac{t_\mathrm{rec}}{\SI{200}{min}} \right)^{1/2}
+  \left( \frac{v_\mathrm{sh}}{0.3c} \right)^{3/2}
+  \left( \frac{t_\mathrm{rise}}{\SI{3}{min}} \right)^{-1}
+  \left( \frac{\tau}{\SI{10}{min}} \right)^{1/2}
+\end{equation}
+% ひとまずKashiyama et al.(2018)にならって\( \zeta = 0.4,\,\epsilon_\mathrm{B} = 0.01 \)
+% を入れてみると
+% \begin{equation}
+%   \nu_e \approx \SI{7.92}{GHz}
+% \end{equation}
+\end{document}
