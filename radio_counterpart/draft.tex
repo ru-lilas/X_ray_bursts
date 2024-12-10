@@ -24,6 +24,8 @@
 \pagestyle{main}
 \AtBeginDocument{\RenewCommandCopy\qty\SI}
 %==============================================================================%
+\newcommand{\Edd}{\mathrm{Edd}}
+\newcommand{\Mdot}{\dot{M}}
 \begin{document}
   % \title{Assignment on 2024-10-29}
   % \author{KUMADA Ryota (C4SM3002)}
@@ -35,37 +37,72 @@
 %   \item X--ray burstでshockが形成される
 %   \item shockが外側の物質を加熱する
 % \end{enumerate}
+% \section{Preface}
+% Type 1 X--ray bursterとして知られている4U 1728--34から電波放射が観測された.
+% ここでは, 設定した電波放射モデルが電波放射を再現できるかどうかについて議論する.
+% 4U 1728--34の観測値は
+% \url{https://binry-revolution.github.io/LMXBwebcat/LMXBs/NAME%20Slow%20Burster.html}
+% に記載されている.
+\section{Eddington accretion rate}
+Eddington luminosity~$L_\Edd$は以下で定義される:
+\begin{equation}
+  L_\Edd
+  = \frac{4\pi G M_* m_p c}{\sigma_\mathrm{T}}
+  = \SI{1.26e38}{erg/s}~\left( \frac{M_*}{M_\odot} \right)
+\end{equation}
+\( G,\,M_*,\,m_p,\,c,\,\sigma_\mathrm{T} \)はそれぞれ
+重力定数, 中性子星の質量, 陽子の質量, 真空中の光速, トムソン散乱断面積.
 
+Eddington accretion rate~$\Mdot_\Edd$を以下で定義する:
+\begin{empheq}{align}
+  \Mdot_\Edd \coloneqq L_\Edd / c^2
+  &= \SI{1.34e17}{g/s}~\left(\frac{M_*}{M_\odot}\right) \\
+  &= \num{2.22e-9}~M_\odot / \si{yr} ~ \left(\frac{M_*}{M_\odot}\right)
+\end{empheq}
 \section{Accretion rateとejecta mass}
-shock ejectaの質量$M_\mathrm{ej}$は, recurrence time \( t_\mathrm{rec} \approx \SI{200}{min} \)の間に降着する質量の$\eta$倍に等しいとする. 
-accretion rateはEddington accretion rate $\dot{M}_{\mathrm{Edd}}$と仮定する.
-ここで, $\dot{M}_{\mathrm{Edd}}$はEddington luminosity:
+4U 1728--34のfiducial valueとして, mass~\( M_* = 1.4M_\odot \)(Shaposhnikov et al.~2003),
+accretion rate~\(\Mdot = 0.1\Mdot_\Edd \)(Galloway et al.~2008)を, それぞれ採用する.
+すなわち,
 \begin{equation}
-  L_\mathrm{Edd} \approx \SI{e38}{erg/s}\left( \frac{M}{M_\odot} \right)
+  \Mdot = \epsilon\Mdot_\Edd(1.4M_\odot)
+  = \SI{1.96e16}{g/s}~
+  \left( \frac{M_*}{1.4M_\odot} \right)
+  \left( \frac{\epsilon}{0.1} \right).
 \end{equation}
-と, 輻射への変換効率$\epsilon$を用いて
-\begin{equation}
-  \dot{M}_{\mathrm{Edd}} = \frac{L_\mathrm{Edd}}{\epsilon c^2}
-  =
-  \SI{1.1e17}{g/s}~
-  \left( \frac{\epsilon}{0.1} \right)^{-1}
-  \left( \frac{M}{M_\odot} \right)
-\end{equation}
-と表せる. よって
+
+shock ejectaの質量$M_\mathrm{ej}$は, recurrence time \( t_\mathrm{rec} \approx \SI{200}{min} \)の
+間に降着する質量の$\eta$倍に等しいとする.
+% % accretion rateはEddington accretion rate $\Mdot_\Edd$
+% \begin{equation}
+%   \Mdot_\Edd = \SI{1.40e17}{g/s}
+% \end{equation}
+% % ここで, $\dot{M}_{\mathrm{Edd}}$はEddington luminosity:
+% % \begin{equation}
+% %   L_\mathrm{Edd} = \SI{1.257e38}{erg/s}\left( \frac{M}{M_\odot} \right)
+% % \end{equation}
+% % と, 輻射への変換効率$\epsilon$を用いて
+% % \begin{equation}
+% %   \dot{M}_{\mathrm{Edd}} = \frac{L_\mathrm{Edd}}{\epsilon c^2}
+% %   =
+% %   \SI{1.1e17}{g/s}~
+% %   \left( \frac{\epsilon}{0.1} \right)^{-1}
+% %   \left( \frac{M}{M_\odot} \right)
+% % \end{equation}
+% % と表せる. よって
 \begin{equation}
   M_\mathrm{ej}
   =
-  \eta\dot{M}_\mathrm{Edd} t_\mathrm{rec}
+  \eta\Mdot t_\mathrm{rec}
   =
-  \SI{1.3e21}{g}~\eta
+  \SI{2.35e20}{g}~\eta
   \left( \frac{t_\mathrm{rec}}{\SI{200}{min}} \right)
+  \left( \frac{M_*}{1.4M_\odot} \right)
   \left( \frac{\epsilon}{0.1} \right)
-  \left( \frac{M}{M_\odot} \right)
 \end{equation}
 
 \section{電波立ち上がり時のshock radius}
-X--ray burstの瞬間に\(t=0\)にshockが立ち, \(v_\mathrm{sh} = 0.3c\)の速さで走ると仮定する.
-観測によれば, X--ray burstが起きてから電波が立ち上がるまでの時間は\( t_\mathrm{rise} \approx \SI{3}{min} \)なので
+Shock ejectaの速さを\(v_\mathrm{sh} = 0.3c\)と仮定する.
+観測によれば, X--ray burstが起きてから電波が立ち上がるまでの時間は\( t_\mathrm{rise} \approx \SI{3}{min} \)である.
 \begin{equation}
   r_\mathrm{sh} = v_\mathrm{sh}t_\mathrm{rise} 
   =
@@ -73,6 +110,7 @@ X--ray burstの瞬間に\(t=0\)にshockが立ち, \(v_\mathrm{sh} = 0.3c\)の速
   =
   \SI{0.11}{AU}~\left(\frac{v_\mathrm{sh}}{0.3c}\right)\left( \frac{t_\mathrm{rise}}{\SI{3}{min}} \right)
 \end{equation}
+この位置でshockが形成され, shockが周辺ガスを加熱すると仮定しておく.
 
 \section{磁場の強さ}
 collisionless--shockはそのエネルギーの一部を磁場へ渡す. 変換効率を$\epsilon_B$とすると
@@ -91,25 +129,29 @@ $B$について解くと
   \eta\epsilon_B
   \frac{\dot{M}_\mathrm{Edd}t_\mathrm{rec}}{v_\mathrm{sh} t^2_\mathrm{rise}\tau}\\
   &\approx
-  \SI{7.6e3}{erg.cm^{-3}}~
-  \eta\epsilon_\mathrm{B}\left( \frac{\epsilon}{0.1} \right) \left( \frac{M}{M_\odot} \right)
-  \left( \frac{t_\mathrm{rec}}{\SI{200}{min}} \right)
-  \left( \frac{v_\mathrm{sh}}{0.3c} \right)^{-1}
-  \left( \frac{t_\mathrm{rise}}{\SI{3}{min}} \right)^{-2}
-  \left( \frac{\tau}{\SI{10}{min}} \right)
+  \SI{13.4}{erg.cm^{-3}}~
+  \eta~
+  \epsilon^{\mathrm{B}}_{\num{1}}~
+  \epsilon_1 ~
+  M^*_{\num{4}}~
+  t^\mathrm{rec}_{\num{200}}~
+  (v^\mathrm{sh}_{\num{3}})^{-1}~
+  (t^\mathrm{rise}_{\num{3}})^{-2}~
+  (\tau_{\num{10}})^{-1}~
+  % \frac{\tau}{\SI{10}{min}}
 \end{empheq}
-\begin{equation}
-  B
-  \approx
-  \SI{87}{G}~
-  \sqrt{\eta\epsilon_\mathrm{B}}
-  \left( \frac{\epsilon}{0.1} \right)^{1/2}
-  \left( \frac{M}{M_\odot} \right)^{1/2}
-  \left( \frac{t_\mathrm{rec}}{\SI{200}{min}} \right)^{1/2}
-  \left( \frac{v_\mathrm{sh}}{0.3c} \right)^{-1/2}
-  \left( \frac{t_\mathrm{rise}}{\SI{3}{min}} \right)^{-1}
-  \left( \frac{\tau}{\SI{10}{min}} \right)^{1/2}
-\end{equation}
+% \begin{equation}
+%   B
+%   \approx
+%   \SI{87}{G}~
+%   \sqrt{\eta\epsilon_\mathrm{B}}
+%   \left( \frac{\epsilon}{0.1} \right)^{1/2}
+%   \left( \frac{M}{M_\odot} \right)^{1/2}
+%   \left( \frac{t_\mathrm{rec}}{\SI{200}{min}} \right)^{1/2}
+%   \left( \frac{v_\mathrm{sh}}{0.3c} \right)^{-1/2}
+%   \left( \frac{t_\mathrm{rise}}{\SI{3}{min}} \right)^{-1}
+%   \left( \frac{\tau}{\SI{10}{min}} \right)^{1/2}
+% \end{equation}
 
 \section{周辺ガスの密度}
 \( \tau \approx \SI{10}{min} \)の間にshockが掃いた領域にあるガスの総質量は$M_\mathrm{ej}$に等しいと仮定する. すなわち
@@ -190,11 +232,11 @@ shockで加速される電子のエネルギー範囲($\gamma_\mathrm{min},\,\ga
   &\approx
   45\zeta 
   \left( \frac{v_\mathrm{sh}}{0.3c} \right)^2
-  \;(\text{using}\; m_p/m_e \approx 10^3) \\
+  % \;(\text{ignoring 1st term because}; 1\ll m_p/m_e \approx 10^3) \\
   % &=
   % 18\left( \frac{\zeta}{0.4} \right)\left( \frac{v_\mathrm{sh}}{0.3c} \right)^2
 \end{empheq}
-となる. 
+となる. 最後の行で, \( 1 \ll m_p/m_e,\,\zeta \leq 1 \)より第1項を無視した.
 % $\zeta$の値はKashiyama et al.(2018)より孫引き. (親はPark et al.(2015)?)
 
 \section{シンクロトロン放射}
