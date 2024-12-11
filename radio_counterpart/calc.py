@@ -15,11 +15,13 @@ M = const.M_sun.cgs
 e = const.e.gauss
 m_e = const.m_e.cgs
 m_p = const.m_p.cgs
+m_u = const.u.cgs
 sigma_T = const.sigma_T.cgs
 
 v_sh = 0.3*c
 t_rec = 200 * u.min
 t_rise = 3 *u.min
+t_x = 10 * u.s
 tau = 10 * u.min
 e_B = 0.01
 def calc_L_Edd(mass):
@@ -31,9 +33,8 @@ def calc_Mdot_Edd(mass):
     value = L_Edd / c**2
     return value
 
-def calc_mag_B2(eps_B,ej_mass,v_sh,r_sh,t_decay):
-    B2 = (eps_B*ej_mass*v_sh / (r_sh**2*t_decay)).to(u.erg/(u.cm)**3)
-    print(f'B^2 = {B2:3g}')
+def calc_mag_B2(eps_B,M_ej,v_sh,r_sh,l_sh):
+    B2 = ((eps_B*M_ej*v_sh**2) / (r_sh**2*l_sh)).to(u.erg/(u.cm)**3)
     return B2
 
 def calc_rho(M_ej,r_sh,v_sh,tau):
@@ -48,22 +49,37 @@ eta_acc = 0.1
 Mdot_4U1728 = eta_acc * calc_Mdot_Edd(1.4*M)
 print(f'Typical Mdot of 4U 1728-34 is {Mdot_4U1728.to(u.g/u.s):3g}')
 
+# thickness of shock ejecta
+l_sh = (v_sh *t_x).to(u.cm)
+
+# shock position from NS surface
+r_sh = (v_sh * t_rise).to(u.cm)
+
 # mass of shock ejecta
 M_ej = Mdot_4U1728 * t_rec
-print(f'Ejecta mass = eta * {(M_ej).to(u.g):3g}')
+
+# printing
+print(f'M_ej / eta = {(M_ej).to(u.g):.2g}')
+print(f'l_sh = {l_sh:.1g}, r_sh = {r_sh:.1g}')
 
 # strength of magnetic field
-r_sh = v_sh * t_rise
-B2 = calc_mag_B2(e_B,M_ej,v_sh,r_sh,tau)
+B2 = calc_mag_B2(e_B,M_ej,v_sh,r_sh,l_sh)
 B = np.sqrt(B2)
-print(f'B= {B:1g}')
+print(f'B^2 = {B2:.2g}, B= {B:.2g}')
 
 # mass density of ambient medium
 rho = calc_rho(M_ej,r_sh,v_sh,tau)
 print(f'rho_amb = {rho.to(u.g/(u.cm)**3):3g}')
 
-C = M_ej*v_sh**2 / (2*m_e *c**2)
-print(C)
+# number density of ambient medium
+# assuming all media are H
+
+n_H = rho/m_u
+print(f'n_amb(H) = {n_H.to(u.cm**(-3)):.3g}')
+
+
+# C = M_ej*v_sh**2 / (2*m_e *c**2)
+# print(C)
 
 # minimum Lorentz factor
 zeta_e = 0.4
