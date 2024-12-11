@@ -36,6 +36,7 @@
 \newcommand{\ftdecay}{\tau_{\num{10}}}
 \newcommand{\fvsh}{v_{\mathrm{sh},\num{0.3}}}
 \newcommand{\fzeta}{\zeta_{\num{0.4}}}
+\newcommand{\fdis}{d_{\num{4.5}}}
 
 \newcommand{\rsh}{r_\mathrm{sh}}
 \newcommand{\lsh}{l_\mathrm{sh}}
@@ -285,9 +286,6 @@ $\gamma_e$のLorenz factorをもつ電子からのシンクロトロン放射を
 %   \nu_e \approx \SI{7.92}{GHz}
 % \end{equation}
 
-
-
-\section{Synchrotron cooling}
 シンクロトロン放射した電子はその分エネルギーを失う.
 あるLorentz factor$\gamma$をもつ電子がエネルギー密度$U_B$の磁場の中で単位時間に放射するエネルギー
 (=電子のエネルギー損失率)は
@@ -339,4 +337,36 @@ $\gamma_e$のLorenz factorをもつ電子からのシンクロトロン放射を
   ~\eta^{-1}~\fepsB^{-1}~\feps^{-1}~\fzeta^{-1}~\fMx^{-1}
   ~\fvsh^{-2}~\ftrec^{-1}~\ftrise~\ftdur
 \end{equation}
+
+上で求めた$P$は1個の電子による放射パワーである.
+shockで掃かれたガスに含まれる電子がすべて
+$\gamma_\mathrm{min}$のシンクロトロン放射しているならば, ビーミングを考慮した上での
+電子の総数$N_e$は
+\begin{equation}
+  N_e \approx \frac{M_\mathrm{ej}}{m_u} \times \frac{2\gamma_\mathrm{min}^{-1}}{2\pi}
+  =
+  \num{1.4e42}~
+  \eta~\feps~\fzeta~\fMx~\fvsh^2~\ftrec
+\end{equation}
+となる.
+\begin{equation}
+  P_\mathrm{tot}
+  =
+  N_e P
+  =
+  \SI{1.3e33}{erg/s}~
+  \eta^2~\feps^2~\fepsB~\fzeta^3~\fMx^2~\fvsh^5~\ftrec^2~\ftrise^{-1}~\ftdur^{-1}\\
+\end{equation}
+
+4U 1728--34までの距離\( d \approx \SI{4.5}{kpc} = \SI{1.4e22}{cm} \)
+(Shaposhnikov et al.(2003))を用いると, fluxは
+\begin{empheq}{align}
+  F
+  &\approx P_\mathrm{tot} / (4\pi d^2 \nu_e)\\
+  &=
+  \SI{6e2}{mJy}~
+  \eta^{1/2}~\feps^{3/2}~\fepsB^{1/2}~\fzeta^{-1}~\fMx^{3/2}~
+  \fvsh^{7/2}~\ftrec^{3/2}~\ftrise^{-1}~\ftdur^{-1}~\fdis^{-2}
+\end{empheq}
+となる. (Rassell et al.(2024)の100倍)
 \end{document}

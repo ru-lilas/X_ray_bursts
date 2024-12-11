@@ -108,4 +108,22 @@ print(f'P = {cooling_rate:.2g} = {cooling_rate.to(u.keV/u.s):.2g}')
 cooling_time = (gamma_factor_min*m_e*c**2) / cooling_rate
 print(f't_cool = {cooling_time.to(u.min):.3g}')
 
+# total number of electron swept by shock
+N_etot = (M_ej / m_u).decompose()
+N_e = N_etot / (PI*gamma_factor_min) # beaming effect
+print(f'N_e = {N_e:.2g}')
+
+#
+P_tot = N_e * cooling_rate
+print(f'P_tot = {P_tot:.2g}')
+
+# distance from 4U 1728-34
+d = 4.5*u.kpc
+print(f'd = {d:.2g} = {d.to(u.cm):.2g}')
+
+# flux estimation
+flux = P_tot / (4*PI*d**2)
+print(f'F = {flux.to(u.erg*u.cm**(-2)*u.s**(-1)):.2g}')
+print(f'F_nu = {(flux/nu_e).to(u.mJy):.2g}')
+
 # print(f'Thomson cross-section: {sigma_T:.2g}')
