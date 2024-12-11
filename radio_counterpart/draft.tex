@@ -133,29 +133,33 @@ $B$について解くと
   \frac{\epsilon_\mathrm{B}M_\mathrm{ej}v_\mathrm{sh}^2}{\rsh^2\lsh}
   =
   \SI{8.1e2}{erg.cm^{-3}}~
-  % \eta~\fepsB~\feps~\fMx~\fvsh^{-1}~\ftrec~\ftrise^{-2}~\ftdecay^{-1}
+  \eta~\feps~\fepsB~\fMx~\fvsh^{-1}~\ftrec~\ftrise^{-1}~\ftdur^{-1}
 \end{empheq}
 \begin{equation}
   B
   \approx
   \SI{28}{G}~
+  \sqrt{\eta}~\feps^{1/2}~\fepsB^{1/2}~\fMx^{1/2}~\fvsh^{-1/2}~
+  \ftrec^{1/2}~\ftrise^{-1/2}~\ftdur^{-1/2}
   % \sqrt{\eta}~\fepsB^{1/2}~\feps^{1/2}~\fMx^{1/2}~
   % \fvsh^{-1/2}~\ftrec^{1/2}~\ftrise^{-1}~\ftdecay^{-1/2}
 \end{equation}
 $\epsilon_\mathrm{B} = 0.01$はKashiyama et al.(2018)から引用.
 
 \section{周辺ガスの密度}
-\( \tau \approx \SI{10}{min} \)の間にshockが掃いた領域にあるガスの総質量は$M_\mathrm{ej}$に等しいと仮定する. すなわち
+電波は\( \tau \approx \SI{10}{min} \)の時間で減衰する.
+この間にshockは\( 4\pi \rsh^2\vsh\tau \)の領域を掃く.
+掃過領域にあるガス(一様密度$\rho_\mathrm{amb}$を仮定)の全質量が$M_\mathrm{ej}$に等しいとすると
 \begin{equation}
   4\pi r^2_\mathrm{sh}\rho_\mathrm{amb}v_\mathrm{sh}\tau = M_\mathrm{ej}
 \end{equation}
-$\rho_\mathrm{amb}$は周辺ガスの質量密度である. $\rho_\mathrm{amb}$について解くと
+を満たす. $\rho_\mathrm{amb}$について解くと
 \begin{empheq}{align}
   \rho_\mathrm{amb}
   &=
   \frac{M_\mathrm{ej}}{4\pi r^2_\mathrm{sh}v_\mathrm{sh}\tau}\\
-  &\approx
-  \SI{1.32e-18}{g.cm^{-3}}
+  &=
+  \SI{1.3e-18}{g.cm^{-3}}
   \feps~\fMx~\fvsh^{-3}~\ftrec~\ftrise^{-2}~\ftdecay^{-1}
   % \epsilon_1 ~
   % (M_{*,\num{1.4}})~
@@ -165,7 +169,7 @@ $\rho_\mathrm{amb}$は周辺ガスの質量密度である. $\rho_\mathrm{amb}$�
   % (\tau_{\num{10}})^{-1}~
 \end{empheq}
 
-ガスがすべて水素で構成されているとすると, ガスの電子数密度は
+ガスがすべて水素で構成されているとすると, 電子数密度は
 \begin{equation}
   n_\mathrm{amb,e}
   = \rho_\mathrm{amb} / (1\cdot m_u)
@@ -270,18 +274,10 @@ $\gamma_e$のLorenz factorをもつ電子からのシンクロトロン放射を
 \begin{equation}
   \nu_e
   \approx
-  \SI{11.2}{GHz}~
+  \SI{87}{GHz}~
   \sqrt{\eta}~
-  \fzeta^2~\fepsB^{1/2}~\feps^{1/2}~\fMx^{1/2}~
-  \ftrec^{1/2}~\fvsh^{3/2}~\ftrise^{-1}~\ftdecay^{-1/2}
-  % {\zeta_{\num{0.4}}}^2~
-  % {\epsilon_{\mathrm{B},0.01}}^{1/2}~
-  % {\epsilon_{0.1}}^{1/2}~
-  % {M_{*,1.4}}^{1/2}~
-  % {t_{\mathrm{rec},200}}^{1/2}~
-  % {v_{\mathrm{sh},0.3}}^{3/2}~
-  % {t_{\mathrm{rise},3}}^{-1}~
-  % {\tau_{\num{10}}}^{-1/2}~
+  \feps^{1/2}~\fepsB^{1/2}~\fzeta^2~\fMx^{1/2}~
+  \fvsh^{3/2}~\ftrec^{1/2}
 \end{equation}
 % ひとまずKashiyama et al.(2018)にならって\( \zeta = 0.4,\,\epsilon_\mathrm{B} = 0.01 \)
 % を入れてみると
@@ -313,15 +309,16 @@ $\gamma_e$のLorenz factorをもつ電子からのシンクロトロン放射を
   % =
   % \epsilon_\mathrm{B}
   % \frac{M_\mathrm{ej}v^2_\mathrm{sh}/2}{4\pi r^2_\mathrm{sh}v_\mathrm{sh}\tau}
-  = \SI{0.53}{erg.em^{-3}}~
-  \eta~\fepsB~\feps~\fMx~\fvsh^{-1}~\ftrec~\ftrise^{-2}~\ftdecay^{-1}
+  = \SI{32}{erg.em^{-3}}~
+  \eta~\feps~\fepsB~\fMx~\fvsh^{-1}~\ftrec~\ftrise^{-1}~\ftdur^{-1}
+  % \eta~\fepsB~\feps~\fMx~\fvsh^{-1}~\ftrec~\ftrise^{-2}~\ftdecay^{-1}
 \end{equation}
 なので
 \begin{empheq}{align}
-  P &= \SI{1.55e-11}{erg/s}
-  ~\eta~\fzeta^2~\fepsB~\feps~\fMx~\fvsh^{3}~\ftrec~\ftrise^{-2}~\ftdecay^{-1}\\
-  &= \SI{9.68e-6}{MeV/s}
-  ~\eta~\fzeta^2~\fepsB~\feps~\fMx~\fvsh^{3}~\ftrec~\ftrise^{-2}~\ftdecay^{-1}
+  P &= \SI{9.3e-10}{erg/s}~
+  \eta~\feps~\fepsB~\fzeta^2\fMx~\fvsh^3~\ftrec~\ftrise^{-1}~\ftdur^{-1}\\
+  &= \SI{0.58}{keV/s}~
+  \eta~\feps~\fepsB~\fzeta^2\fMx~\fvsh^3~\ftrec~\ftrise^{-1}~\ftdur^{-1}\\
 \end{empheq}
 となる.
 % ($\beta$に含まれる$v_\mathrm{sh}$の依存性は無視した).
@@ -337,9 +334,9 @@ $\gamma_e$のLorenz factorをもつ電子からのシンクロトロン放射を
   t_\mathrm{cool}
   \approx
   \frac{\gamma_\mathrm{min}m_ec^2}{P}
-  =
-  \SI{2.9e4}{min}
-  ~\eta^{-1}~\fzeta^{-1}~\fepsB^{-1}~\feps^{-1}~\fMx^{-1}
-  ~\fvsh^{-2}~\ftrec^{-1}~\ftrise^{2}~\ftdecay^{1}
+  \approx
+  \SI{484}{min}
+  ~\eta^{-1}~\fepsB^{-1}~\feps^{-1}~\fzeta^{-1}~\fMx^{-1}
+  ~\fvsh^{-2}~\ftrec^{-1}~\ftrise~\ftdur
 \end{equation}
 \end{document}

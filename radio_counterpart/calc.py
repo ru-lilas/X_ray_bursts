@@ -60,7 +60,7 @@ M_ej = Mdot_4U1728 * t_rec
 
 # printing
 print(f'M_ej / eta = {(M_ej).to(u.g):.2g}')
-print(f'l_sh = {l_sh:.1g}, r_sh = {r_sh:.1g}')
+print(f'l_sh = {l_sh:.2g}, r_sh = {r_sh:.2g}')
 
 # strength of magnetic field
 B2 = calc_mag_B2(e_B,M_ej,v_sh,r_sh,l_sh)
@@ -92,7 +92,7 @@ def calc_frequency(gamma_factor, B):
     return value
 
 nu_e = calc_frequency(gamma_factor_min,B)
-print(nu_e.to(u.GHz))
+print(f'nu_e = {nu_e.to(u.GHz):.2g}')
 
 # synchrotron cooling
 u_B = B2/(8*PI)
@@ -103,9 +103,9 @@ def calc_synP(gamma_factor,u_B):
     value = (4*sigma_T*c*gamma_factor**2*u_B) / 3.0
     return value
 cooling_rate = calc_synP(gamma_factor_min,u_B)
-print(f'P = {cooling_rate:2g} = {cooling_rate.to(u.MeV/u.s):2g}')
+print(f'P = {cooling_rate:.2g} = {cooling_rate.to(u.keV/u.s):.2g}')
 
 cooling_time = (gamma_factor_min*m_e*c**2) / cooling_rate
 print(f't_cool = {cooling_time.to(u.min):.3g}')
 
-print(f'Thomson cross-section: {sigma_T:.2g}')
+# print(f'Thomson cross-section: {sigma_T:.2g}')
