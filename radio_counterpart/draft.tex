@@ -178,34 +178,44 @@ $\epsilon_\mathrm{B} = 0.01$はKashiyama et al.(2018)から引用.
   \feps~\fMx~\fvsh^{-3}~\ftrec~\ftrise^{-2}~\ftdecay^{-1}
 \end{equation}
 
+\section{電子の最大Lorentz factor}
+電子の最大Lorentz factor$\gamma_\mathrm{max}$は
+\begin{equation}
+  \left(\frac{9\pi e\beta^2}{10\sigma_\mathrm{T}B}\right)^{1/2} \approx
+  \left(\frac{9\pi e}{10\sigma_\mathrm{T}B}\right)^{1/2} \:(\beta\to 1)
+\end{equation}
+で与えられる(Kashiyama et al.(2018)). 値を代入すると
+\begin{equation}
+  \gamma_\mathrm{max} = \num{8.5e6}~B_{\num{28}}^{-1/2}
+\end{equation}
+
 \section{Power--lawの比例係数}
-工事中.
-% 電子分布はpower lawに従うとする.
-% \begin{equation}
-%   \dv{N}{\gamma} = C\gamma^{-p}\quad(\text{for}\;\gamma_\mathrm{min} < \gamma < \gamma_\mathrm{max})
-% \end{equation}
-% shockはそのエネルギーの一部を周囲の電子へ受け渡す. 効率を$\epsilon_\mathrm{e}$とおくと
-% \begin{equation}
-%   \epsilon_\mathrm{e} \frac{M_\mathrm{ej}}{2}v^2_\mathrm{sh}
-%   =
-%   \int_{\gamma_\mathrm{min}}^{\gamma_\mathrm{max}} \gamma m_\mathrm{e}c^2 \dv{N}{\gamma}\dd{\gamma}
-%   =
-%   m_\mathrm{e}c^2 \frac{C}{2-p}
-%   \left[ \gamma^{2-p} \right]_{\gamma_\mathrm{min}}^{\gamma_\mathrm{max}}
-% \end{equation}
-% となる. $C$について解くと
-% \begin{empheq}{align}
-%   C
-%   &=
-%   \epsilon_\mathrm{e} \frac{M_\mathrm{ej}v^2_\mathrm{sh}}{2m_\mathrm{e}c^2}
-%   (2-p) \left( \gamma_\mathrm{max}^{2-p} - \gamma_\mathrm{min}^{2-p} \right)^{-1}\\
-%   &=
-%   \num{6.6e46}\eta\epsilon_\mathrm{e}~
-%   (2-p) \left( \gamma_\mathrm{max}^{2-p} - \gamma_\mathrm{min}^{2-p} \right)^{-1}
-%   \left( \frac{\dot{M}}{\dot{M}_\mathrm{Edd}} \right)
-%   \left( \frac{t_\mathrm{rec}}{\SI{200}{min}} \right)
-%   \left( \frac{v_\mathrm{sh}}{0.3c} \right)^2
-% \end{empheq}
+電子分布はpower lawに従うとする.
+\begin{equation}
+  \dv{N}{\gamma} = C\gamma^{-p}\quad(\gamma_\mathrm{min} < \gamma < \gamma_\mathrm{max})
+\end{equation}
+shockはそのエネルギーの一部を周囲の電子へ受け渡す. 効率を$\epsilon_\mathrm{e}$とおくと
+\begin{empheq}{align}
+  \epsilon_\mathrm{e} \frac{M_\mathrm{ej}}{2}v^2_\mathrm{sh}
+  &=
+  \int_{\gamma_\mathrm{min}}^{\gamma_\mathrm{max}}
+  \gamma m_\mathrm{e}c^2 \dv{N}{\gamma}\dd{\gamma} \\
+  &=
+  m_\mathrm{e}c^2 \frac{C}{2-p}
+  \left[ \gamma^{2-p} \right]_{\gamma_\mathrm{min}}^{\gamma_\mathrm{max}} \\
+  &\approx
+  m_\mathrm{e}c^2 \frac{C}{p-2} \gamma_{\mathrm{min}}^{2-p}
+  \quad (p>2,\,\gamma_{\mathrm{max}} \gg \gamma_{\mathrm{min}})
+\end{empheq}
+となる. $C$について解くと
+\begin{empheq}{align}
+  C
+  &=
+  (p-2)\gamma_{\mathrm{min}}^{p-2}~
+  \frac{\epsilon_e M_\mathrm{ej}\vsh^2/2}{m_e c^2} \\
+  &=
+  \num{1.1e46}~(p-2)~\gamma_{\mathrm{min}}^{p-2}\epsilon_e
+\end{empheq}
 
 % shockで加速される電子のエネルギー範囲($\gamma_\mathrm{min},\,\gamma_\mathrm{max}$)が
 % 分かれば, $C$の値を見積もることができる.
@@ -340,33 +350,50 @@ $\gamma_e$のLorenz factorをもつ電子からのシンクロトロン放射を
 
 上で求めた$P$は1個の電子による放射パワーである.
 shockで掃かれたガスに含まれる電子がすべて
-$\gamma_\mathrm{min}$のシンクロトロン放射しているならば, ビーミングを考慮した上での
+$\gamma_\mathrm{min}$のシンクロトロン放射しているならば, 
+% ビーミングを考慮した上での
 電子の総数$N_e$は
 \begin{equation}
-  N_e \approx \frac{M_\mathrm{ej}}{m_u} \times \frac{2\gamma_\mathrm{min}^{-1}}{2\pi}
+  N_e \approx \frac{M_\mathrm{ej}}{m_u}
   =
-  \num{1.4e42}~
-  \eta~\feps~\fzeta~\fMx~\fvsh^2~\ftrec
+  \num{1.4e44}~
+  \eta~\feps~\fMx~\ftrec
 \end{equation}
+% \begin{equation}
+%   N_e \approx \frac{M_\mathrm{ej}}{m_u} \times \frac{2\gamma_\mathrm{min}^{-1}}{2\pi}
+%   =
+%   \num{1.4e42}~
+%   \eta~\feps~\fzeta~\fMx~\fvsh^2~\ftrec
+% \end{equation}
 となる.
 \begin{equation}
   P_\mathrm{tot}
   =
   N_e P
   =
-  \SI{1.3e33}{erg/s}~
-  \eta^2~\feps^2~\fepsB~\fzeta^3~\fMx^2~\fvsh^5~\ftrec^2~\ftrise^{-1}~\ftdur^{-1}\\
+  \SI{1.3e35}{erg/s}~
+  \eta^2~\feps^2~\fepsB~\fzeta^2~\fMx^2~\fvsh^3~\ftrec^2~\ftrise^{-1}~\ftdur^{-1}
 \end{equation}
 
-4U 1728--34までの距離\( d \approx \SI{4.5}{kpc} = \SI{1.4e22}{cm} \)
-(Shaposhnikov et al.(2003))を用いると, fluxは
-\begin{empheq}{align}
-  F
-  &\approx P_\mathrm{tot} / (4\pi d^2 \nu_e)\\
-  &=
-  \SI{6e2}{mJy}~
-  \eta^{1/2}~\feps^{3/2}~\fepsB^{1/2}~\fzeta^{-1}~\fMx^{3/2}~
-  \fvsh^{7/2}~\ftrec^{3/2}~\ftrise^{-1}~\ftdur^{-1}~\fdis^{-2}
-\end{empheq}
-となる. (Rassell et al.(2024)の100倍)
+% 4U 1728--34までの距離\( d \approx \SI{4.5}{kpc} = \SI{1.4e22}{cm} \)
+% (Shaposhnikov et al.(2003))を用いると, fluxは
+% \begin{empheq}{align}
+%   F_\nu
+%   &\approx P_\mathrm{tot} / (4\pi d^2 \nu_e)\\
+%   &=
+%   \SI{6e2}{mJy}~
+%   \eta^{1/2}~\feps^{3/2}~\fepsB^{1/2}~\fzeta^{-1}~\fMx^{3/2}~
+%   \fvsh^{7/2}~\ftrec^{3/2}~\ftrise^{-1}~\ftdur^{-1}~\fdis^{-2}
+% \end{empheq}
+% となる. (Rassell et al.(2024)の100倍)
+
+\subsection{Power--lawに従う電子分布からのシンクロトロン放射}
+\begin{equation}
+  P_{\nu} = 
+  \frac{\sqrt{3}e^3CB}{m_ec^2(p+1)}
+  \Gamma\left( \frac{p}{4} + \frac{19}{12} \right)
+  \Gamma\left( \frac{p}{4} - \frac{1}{12} \right)
+  \left( \frac{2\pi\nu m_ec}{3eB} \right)^{-(p-1)/2}
+\end{equation}
+\( p = 2.5,\,\epsilon_e = 0.4 \)を仮定して計算すると
 \end{document}
