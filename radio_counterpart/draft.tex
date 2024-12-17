@@ -192,7 +192,8 @@ $\epsilon_\mathrm{B} = 0.01$はKashiyama et al.(2018)から引用.
 \section{Power--lawの比例係数}
 電子分布はpower lawに従うとする.
 \begin{equation}
-  \dv{N}{\gamma} = C\gamma^{-p}\quad(\gamma_\mathrm{min} < \gamma < \gamma_\mathrm{max})
+  \label{eq:powerlaw_gamma}
+  \dv{N}{\gamma} = N_0\gamma^{-p}\quad(\gamma_\mathrm{min} < \gamma < \gamma_\mathrm{max})
 \end{equation}
 shockはそのエネルギーの一部を周囲の電子へ受け渡す. 効率を$\epsilon_\mathrm{e}$とおくと
 \begin{empheq}{align}
@@ -201,15 +202,15 @@ shockはそのエネルギーの一部を周囲の電子へ受け渡す. 効率�
   \int_{\gamma_\mathrm{min}}^{\gamma_\mathrm{max}}
   \gamma m_\mathrm{e}c^2 \dv{N}{\gamma}\dd{\gamma} \\
   &=
-  m_\mathrm{e}c^2 \frac{C}{2-p}
+  m_\mathrm{e}c^2 \frac{N_0}{2-p}
   \left[ \gamma^{2-p} \right]_{\gamma_\mathrm{min}}^{\gamma_\mathrm{max}} \\
   &\approx
-  m_\mathrm{e}c^2 \frac{C}{p-2} \gamma_{\mathrm{min}}^{2-p}
+  m_\mathrm{e}c^2 \frac{N_0}{p-2} \gamma_{\mathrm{min}}^{2-p}
   \quad (p>2,\,\gamma_{\mathrm{max}} \gg \gamma_{\mathrm{min}})
 \end{empheq}
-となる. $C$について解くと
+となる. $N_0$について解くと
 \begin{empheq}{align}
-  C
+  N_0
   &=
   (p-2)\gamma_{\mathrm{min}}^{p-2}~
   \frac{\epsilon_e M_\mathrm{ej}\vsh^2/2}{m_e c^2} \\
@@ -387,13 +388,102 @@ $\gamma_\mathrm{min}$のシンクロトロン放射しているならば,
 % \end{empheq}
 % となる. (Rassell et al.(2024)の100倍)
 
+
 \subsection{Power--lawに従う電子分布からのシンクロトロン放射}
-\begin{equation}
-  P_{\nu} = 
-  \frac{\sqrt{3}e^3CB}{m_ec^2(p+1)}
+分布が\eqref{eq:powerlaw_gamma}で与えられる電子のシンクロトロン放射スペクトルは
+以下で与えられる(Rybicki \& Lightman, 1979):
+\begin{empheq}{align}
+  P_{\nu} 
+  &= 
+  \frac{\sqrt{3}e^3N_0B}{m_ec^2(p+1)}
   \Gamma\left( \frac{p}{4} + \frac{19}{12} \right)
   \Gamma\left( \frac{p}{4} - \frac{1}{12} \right)
-  \left( \frac{2\pi\nu m_ec}{3eB} \right)^{-(p-1)/2}
+  \left( \frac{2\pi\nu m_ec}{3eB} \right)^{-(p-1)/2} \\
+  &=
+  \frac{eB\hbar c}{m_e c^2}
+  \left( \frac{2\pi m_e c^2 \nu}{3eBc} \right)^{-(p-1)/2}
+  \frac{\sqrt{3}\alpha N_0}{p+1}
+  \Gamma\left( \frac{3p+19}{12} \right)
+  \Gamma\left( \frac{3p-1}{12} \right) \\
+  &=
+  \frac{\sqrt{3}N_0 r_e f}{p+1}
+  \left( \frac{2\pi E_\mathrm{res}\lambda^{-1}}{3f} \right)^{-(p-1)/2}
+  \Gamma\left( \frac{3p+19}{12} \right)
+  \Gamma\left( \frac{3p-1}{12} \right) \\
+\end{empheq}
+ここで, 
+\( r_e = e^2/(m_e c^2) \)は古典電子半径である.
+また, \( f = eB,\, E_{\mathrm{res}} = m_e c^2,\, \lambda = c/\nu\)
+とおいた.
+
+\subsection{SSAの吸収係数}
+エネルギー$E$あたりの電子の密度分布\( N(E) \)は以下に従うと仮定する.
+\begin{equation}
+  \dv{N(E)}{E} = \tilde{N}_0 E^{-p}
 \end{equation}
-\( p = 2.5,\,\epsilon_e = 0.4 \)を仮定して計算すると
+\( \gamma = E/(m_e c^2) \)なので,
+$\tilde{N}_0$と$N_0$とは以下の関係がある:
+\begin{equation}\label{eq:powerlaw_convert_NE_Ngamma}
+  \tilde{N}_0 = (m_e c^2)^{p-1} N_0
+\end{equation}
+
+synchrotron self--absorptionの
+吸収係数は以下で与えられる(Rybicki \& Lightman, 1979).
+\begin{empheq}{align}
+  \alpha_\nu
+  &=
+  \frac{\sqrt{3}e^3}{8\pi m_e} \left( \frac{3e}{2\pi m_e^3 c^5} \right)^{p/2}
+  \tilde{N}_0B^{(p+2)/2}~
+  \Gamma\left( \frac{3p+2}{12} \right)
+  \Gamma\left( \frac{3p+22}{12} \right)
+  \nu^{-(p+4)/2} \\
+  &=
+  \frac{\sqrt{3}\tilde{N}_0 r_e}{8\pi}
+  eB\left( \frac{c}{\nu} \right)^2
+  \left( \frac{3}{2\pi}\frac{eB}{(m_e c^2)^3}
+  \frac{c}{\nu} \right)^{p/2}
+  \Gamma\left( \frac{3p+2}{12} \right)
+  \Gamma\left( \frac{3p+22}{12} \right) \\
+  &=
+  \frac{\sqrt{3}{E_\mathrm{res}}^{p-1}N_0 r_e f}{8\pi \lambda^{-2}}
+  \left( \frac{3f}{2\pi E_{\mathrm{res}}^3 \lambda^{-1}} \right)^{p/2}
+  \Gamma\left( \frac{3p+2}{12} \right)
+  \Gamma\left( \frac{3p+22}{12} \right)
+\end{empheq}
+最後の等式で\eqref{eq:powerlaw_convert_NE_Ngamma}を用いた.
+
+源泉関数は
+\begin{empheq}{align}
+  S_\nu
+  \coloneqq \frac{P_\nu}{4\pi\alpha_\nu}
+  &=
+  \frac{2\lambda^{-2} E_\mathrm{res}}{p+1}
+  \left( \frac{2\pi E_\mathrm{res}\lambda^{-1}}{3f} \right)^{1/2}
+  \frac{
+    \Gamma\left( \frac{3p+19}{12} \right)
+    \Gamma\left( \frac{3p-1}{12} \right)
+  }{
+  \Gamma\left( \frac{3p+2}{12} \right)
+  \Gamma\left( \frac{3p+22}{12} \right)
+  }\\
+  &=
+  \left( \frac{\nu}{c} \right)^{5/2}
+  \frac{2m_e c^2}{p+1}
+  \left( \frac{2\pi m_e c^2}{3eB} \right)^{1/2}
+  \frac{
+    \Gamma\left( \frac{3p+19}{12} \right)
+    \Gamma\left( \frac{3p-1}{12} \right)
+  }{
+  \Gamma\left( \frac{3p+2}{12} \right)
+  \Gamma\left( \frac{3p+22}{12} \right)
+  }
+\end{empheq}
+となる.
+天体までの距離\( d = \SI{4.5}{kpc} \)とすると, 観測されるflux~$F_\nu$は
+\begin{equation}
+  F_\nu
+  \approx S_\nu\left( \frac{\rsh^2}{d^2} \right)
+  \approx \num{1.4e-20}S_\nu
+\end{equation}
+となる.
 \end{document}
