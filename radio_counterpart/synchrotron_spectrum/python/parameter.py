@@ -9,8 +9,9 @@ tau = 10 * u.min # decay time of radio burst
 d = 4.5*u.kpc # distance from 4U 1728-34
 
 # parameters
-e_B = 0.01
+eta = 1.0 # M_ej / (Mdot t_rec)
+eps = 0.1 # Mdot / Mdot(Edd)
+eps_B = 0.01 
 eps_e = 0.1
-p = 2.5
-eta_acc = 0.1
+p = 2.5 # power-law index
 zeta_e = 0.4
