@@ -178,7 +178,8 @@ $\epsilon_\mathrm{B} = 0.01$はKashiyama et al.(2018)から引用.
   \feps~\fMx~\fvsh^{-3}~\ftrec~\ftrise^{-2}~\ftdecay^{-1}
 \end{equation}
 
-\section{電子の最大Lorentz factor}
+\section{電子のLorentz factor}
+\subsection{Maximum Lorentz factor}
 電子の最大Lorentz factor$\gamma_\mathrm{max}$は
 \begin{equation}
   \left(\frac{9\pi e\beta^2}{10\sigma_\mathrm{T}B}\right)^{1/2} \approx
@@ -189,41 +190,7 @@ $\epsilon_\mathrm{B} = 0.01$はKashiyama et al.(2018)から引用.
   \gamma_\mathrm{max} = \num{8.5e6}~B_{\num{28}}^{-1/2}
 \end{equation}
 
-\section{Power--lawの比例係数}
-電子分布はpower lawに従うとする.
-\begin{equation}
-  \label{eq:powerlaw_gamma}
-  \dv{N}{\gamma} = N_0\gamma^{-p}\quad(\gamma_\mathrm{min} < \gamma < \gamma_\mathrm{max})
-\end{equation}
-ここで$N_0$は数密度の次元をもつ定数である.
-
-shockはそのエネルギーの一部を周囲の電子へ受け渡す. 効率を$\epsilon_\mathrm{e}$とおくと
-\begin{empheq}{align}
-  \epsilon_\mathrm{e} \frac{M_\mathrm{ej}}{2}v^2_\mathrm{sh}
-  &=
-  \int_{\gamma_\mathrm{min}}^{\gamma_\mathrm{max}}
-  \gamma m_\mathrm{e}c^2 \dv{N}{\gamma}\dd{\gamma} \\
-  &=
-  m_\mathrm{e}c^2 \frac{N_0}{2-p}
-  \left[ \gamma^{2-p} \right]_{\gamma_\mathrm{min}}^{\gamma_\mathrm{max}} \\
-  &\approx
-  m_\mathrm{e}c^2 \frac{N_0}{p-2} \gamma_{\mathrm{min}}^{2-p}
-  \quad (p>2,\,\gamma_{\mathrm{max}} \gg \gamma_{\mathrm{min}})
-\end{empheq}
-となる. $N_0$について解くと
-\begin{empheq}{align}
-  N_0
-  &=
-  (p-2)\gamma_{\mathrm{min}}^{p-2}~
-  \frac{\epsilon_e M_\mathrm{ej}\vsh^2/2}{m_e c^2} \\
-  &=
-  \num{1.1e46}~(p-2)~\gamma_{\mathrm{min}}^{p-2}\epsilon_e
-\end{empheq}
-
-% shockで加速される電子のエネルギー範囲($\gamma_\mathrm{min},\,\gamma_\mathrm{max}$)が
-% 分かれば, $C$の値を見積もることができる.
-
-\section{放射電子の最小エネルギー}
+\subsection{Minimum Lorentz factor}
 プラズマガスはshockからエネルギーを受け取り熱化される. 電子の熱エネルギー$kT_e$が, $v_\mathrm{sh}$で走る電子の運動エネルギーに等しいと仮定すると
 \begin{equation}
   kT_e
@@ -252,19 +219,9 @@ shockはそのエネルギーの一部を周囲の電子へ受け渡す. 効率�
   \zeta \frac{m_p}{2m_e}\frac{v_\mathrm{sh}^2}{c^2} \\
   &=
   33~\fzeta~\fvsh^{2}
-  % 0.045 \left( 1 + \zeta\frac{m_p}{m_e} \right)
-  % \left( \frac{v_\mathrm{sh}}{0.3c} \right)^2 \\
-  % &\approx
-  % 45\zeta 
-  % \left( \frac{v_\mathrm{sh}}{0.3c} \right)^2
-  % \;(\text{ignoring 1st term because}; 1\ll m_p/m_e \approx 10^3) \\
-  % &=
-  % 18\left( \frac{\zeta}{0.4} \right)\left( \frac{v_\mathrm{sh}}{0.3c} \right)^2
 \end{empheq}
 となる. 
-$\zeta_ = 0.4$はKashiyama et al.(2018)の値を引用.
-% 最後の行で, \( 1 \ll m_p/m_e,\,\zeta \leq 1 \)より第1項を無視した.
-% $\zeta$の値はKashiyama et al.(2018)より孫引き. (親はPark et al.(2015)?)
+$\zeta= 0.4$はKashiyama et al.(2018)の値を引用.
 
 \section{シンクロトロン放射}
 $\gamma_e$のLorenz factorをもつ電子からのシンクロトロン放射を考える.
@@ -332,14 +289,6 @@ $\gamma_e$のLorenz factorをもつ電子からのシンクロトロン放射を
   \eta~\feps~\fepsB~\fzeta^2\fMx~\fvsh^3~\ftrec~\ftrise^{-1}~\ftdur^{-1}\\
 \end{empheq}
 となる.
-% ($\beta$に含まれる$v_\mathrm{sh}$の依存性は無視した).
-%---betaのnormalized factorを残したversion
-% \begin{empheq}{align}
-%   P &= \SI{1.55e-11}{erg/s}
-%   ~\eta~\fzeta^2~\fepsB~\feps~\fMx~\fvsh^{5}~\ftrec~\ftrise^{-2}~\ftdecay^{-1}\\
-%   &= \SI{9.68e-6}{MeV/s}
-%   ~\eta~\fzeta^2~\fepsB~\feps~\fMx~\fvsh^{5}~\ftrec~\ftrise^{-2}~\ftdecay^{-1}
-% \end{empheq}
 よって, シンクロトロン放射の寄与だけを考えた冷却時間は
 \begin{equation}
   t_\mathrm{cool}
@@ -390,6 +339,40 @@ $\gamma_\mathrm{min}$のシンクロトロン放射しているならば,
 % \end{empheq}
 % となる. (Rassell et al.(2024)の100倍)
 
+
+\section{Power--lawに従う電子分布からのシンクロトロン放射}
+\subsection{比例係数の決定}
+電子分布はpower lawに従うとする.
+\begin{equation}
+  \label{eq:powerlaw_gamma}
+  \dv{N}{\gamma} = N_0\gamma^{-p}\quad(\gamma_\mathrm{min} < \gamma < \gamma_\mathrm{max})
+\end{equation}
+ここで$N_0$は数密度の次元をもつ定数である.
+
+shockはそのエネルギーの一部を周囲の電子へ受け渡す. 効率を$\epsilon_\mathrm{e}$とおくと
+\begin{empheq}{align}
+  \epsilon_\mathrm{e} 
+  \frac{M_\mathrm{ej}v^2_\mathrm{sh}/2}{4\pi\rsh^2\lsh}
+  &=
+  \int_{\gamma_\mathrm{min}}^{\gamma_\mathrm{max}}
+  \gamma m_\mathrm{e}c^2 \dv{N}{\gamma}\dd{\gamma} \\
+  &=
+  m_\mathrm{e}c^2 \frac{N_0}{2-p}
+  \left[ \gamma^{2-p} \right]_{\gamma_\mathrm{min}}^{\gamma_\mathrm{max}} \\
+  &\approx
+  m_\mathrm{e}c^2 \frac{N_0}{p-2} \gamma_{\mathrm{min}}^{2-p}
+  \quad (p>2,\,\gamma_{\mathrm{max}} \gg \gamma_{\mathrm{min}})
+\end{empheq}
+が成り立つ. $N_0$について解くと
+\begin{empheq}{align}
+  N_0
+  &=
+  (p-2)\gamma_{\mathrm{min}}^{p-2}~
+  \frac{\epsilon_e M_\mathrm{ej}\vsh^2/2}{4\pi\rsh^2\lsh m_e c^2} \\
+  &=
+  \SI{1.1e9}{cm^{-3}}~ \epsilon_e (p-2) \gamma_\mathrm{min}^{p-2}
+  % \num{1.1e46}~(p-2)~\gamma_{\mathrm{min}}^{p-2}\epsilon_e
+\end{empheq}
 
 \subsection{Power--lawに従う電子分布からのシンクロトロン放射}
 分布が\eqref{eq:powerlaw_gamma}で与えられる電子のシンクロトロン放射スペクトルは
