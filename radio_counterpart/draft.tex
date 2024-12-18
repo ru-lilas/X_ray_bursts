@@ -195,6 +195,8 @@ $\epsilon_\mathrm{B} = 0.01$はKashiyama et al.(2018)から引用.
   \label{eq:powerlaw_gamma}
   \dv{N}{\gamma} = N_0\gamma^{-p}\quad(\gamma_\mathrm{min} < \gamma < \gamma_\mathrm{max})
 \end{equation}
+ここで$N_0$は数密度の次元をもつ定数である.
+
 shockはそのエネルギーの一部を周囲の電子へ受け渡す. 効率を$\epsilon_\mathrm{e}$とおくと
 \begin{empheq}{align}
   \epsilon_\mathrm{e} \frac{M_\mathrm{ej}}{2}v^2_\mathrm{sh}
@@ -459,17 +461,16 @@ synchrotron self--absorptionの
   &=
   \frac{2\lambda^{-2} E_\mathrm{res}}{p+1}
   \left( \frac{2\pi E_\mathrm{res}\lambda^{-1}}{3f} \right)^{1/2}
-  \frac{
-    \Gamma\left( \frac{3p+19}{12} \right)
-    \Gamma\left( \frac{3p-1}{12} \right)
-  }{
-  \Gamma\left( \frac{3p+2}{12} \right)
-  \Gamma\left( \frac{3p+22}{12} \right)
-  }\\
+  G(p) \\
   &=
   \left( \frac{\nu}{c} \right)^{5/2}
   \frac{2m_e c^2}{p+1}
   \left( \frac{2\pi m_e c^2}{3eB} \right)^{1/2}
+  G(p)
+\end{empheq}
+となる. ただし
+\begin{equation}
+  G(p) = 
   \frac{
     \Gamma\left( \frac{3p+19}{12} \right)
     \Gamma\left( \frac{3p-1}{12} \right)
@@ -477,8 +478,9 @@ synchrotron self--absorptionの
   \Gamma\left( \frac{3p+2}{12} \right)
   \Gamma\left( \frac{3p+22}{12} \right)
   }
-\end{empheq}
-となる.
+\end{equation}
+である.
+
 天体までの距離\( d = \SI{4.5}{kpc} \)とすると, 観測されるflux~$F_\nu$は
 \begin{equation}
   F_\nu
@@ -486,4 +488,26 @@ synchrotron self--absorptionの
   \approx \num{1.4e-20}S_\nu
 \end{equation}
 となる.
+
+\subsection{Optical depthの評価}
+Optical depth~$\tau_\nu$は
+\begin{equation}
+  \tau_\nu \coloneqq \alpha_\nu \lsh
+  =
+  \frac{\sqrt{3} (m_e c^2)^{p-1} N_0 r_e eB \lsh}{8\pi (\nu/c)^2}
+    \left( \frac{3eB}{2\pi(m_e c^2)^3(\nu/c)} \right)^{p/2}
+    \Gamma\left( \frac{3p+2}{12} \right)
+    \Gamma\left( \frac{3p+22}{12} \right)
+\end{equation}
+とかける. \( \tau = 1 \)のときの周波数$\nu_0$を求めると
+\begin{equation}
+  \nu_0/c
+  =
+  \left( 
+    \frac{\sqrt{3} (m_e c^2)^{p-1} N_0 r_e eB \lsh}{8\pi}
+    \Gamma\left( \frac{3p+2}{12} \right)
+    \Gamma\left( \frac{3p+22}{12} \right)
+  \right)^{2/(p+4)}
+  \left( \frac{3eB}{2\pi(m_e c^2)^3} \right)^{p/(p+4)}
+\end{equation}
 \end{document}
