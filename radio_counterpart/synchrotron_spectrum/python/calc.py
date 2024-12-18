@@ -1,21 +1,8 @@
 from imports import *
+from parameter import *
+from calc_accretion_rate import Mdot
+from calc_shock import l_sh, r_sh, M_ej
 fdir = './output'
-v_sh = 0.3*c
-t_rec = 200 * u.min
-t_rise = 3 *u.min
-t_x = 10 * u.s
-tau = 10 * u.min
-e_B = 0.01
-p = 2.5
-def calc_L_Edd(mass):
-    value = 4*PI*G*mass*m_p*c / sigma_T
-    return value.to(u.erg / u.year)
-
-def calc_Mdot_Edd(mass):
-    L_Edd = calc_L_Edd(mass)
-    value = L_Edd / c**2
-    return value
-
 def calc_rho(M_ej,r_sh,v_sh,tau):
     value = M_ej / (4*PI*r_sh**2*v_sh*tau)
     return value
@@ -23,27 +10,6 @@ def calc_rho(M_ej,r_sh,v_sh,tau):
 def convert_P_to_F(power,distance):
     val = power / (4*PI*distance**2)
     return val.to(u.Jy)
-
-
-M_Edd_sol = calc_Mdot_Edd(M)
-print(f'M_Edd_sol = {M_Edd_sol.to(u.g/u.s):3g} = {(M_Edd_sol/M).value:3g} M_sol {u.year**(-1)}')
-
-eta_acc = 0.1
-Mdot_4U1728 = eta_acc * calc_Mdot_Edd(1.4*M)
-print(f'Typical Mdot of 4U 1728-34 is {Mdot_4U1728.to(u.g/u.s):3g}')
-
-# thickness of shock ejecta
-l_sh = (v_sh *t_x).to(u.cm)
-
-# shock position from NS surface
-r_sh = (v_sh * t_rise).to(u.cm)
-
-# mass of shock ejecta
-M_ej = Mdot_4U1728 * t_rec
-
-# printing
-print(f'M_ej / eta = {(M_ej).to(u.g):.2g}')
-print(f'l_sh = {l_sh:.2g}, r_sh = {r_sh:.2g}')
 
 from calc_B_field import B2, B
 
@@ -73,7 +39,6 @@ def calc_synchrotron_coefficient(p,eps_e,min_gamma):
     return val
 
 # minimum Lorentz factor
-zeta_e = 0.4
 gamma_factor_min = (zeta_e * m_p * v_sh**2) / (2* m_e * c**2)
 print(f'gamma_factor_min = {gamma_factor_min:3g}')
 
@@ -110,7 +75,6 @@ P_tot = N_e * cooling_rate
 print(f'P_tot = {P_tot:.2g}')
 
 # distance from 4U 1728-34
-d = 4.5*u.kpc
 print(f'd = {d:.2g} = {d.to(u.cm):.2g}')
 
 # flux estimation
