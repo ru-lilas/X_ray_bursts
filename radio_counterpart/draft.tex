@@ -374,7 +374,7 @@ shockはそのエネルギーの一部を周囲の電子へ受け渡す. 効率�
   % \num{1.1e46}~(p-2)~\gamma_{\mathrm{min}}^{p-2}\epsilon_e
 \end{empheq}
 
-\subsection{Power--lawに従う電子分布からのシンクロトロン放射}
+\subsection{Optically thin領域からの放射}
 分布が\eqref{eq:powerlaw_gamma}で与えられる電子のシンクロトロン放射スペクトルは
 以下で与えられる(Rybicki \& Lightman, 1979):
 \begin{empheq}{align}
@@ -391,23 +391,30 @@ shockはそのエネルギーの一部を周囲の電子へ受け渡す. 効率�
   \Gamma\left( \frac{3p+19}{12} \right)
   \Gamma\left( \frac{3p-1}{12} \right) \\
   &=
-  \frac{\sqrt{3}N_0 r_e f}{p+1}
-  \left( \frac{2\pi E_\mathrm{res}\lambda^{-1}}{3f} \right)^{-(p-1)/2}
+  \frac{\sqrt{3}N_0 r_e eB}{p+1}
+  \left( \frac{2\pi (m_e c^2)(\nu/c)}{3eB} \right)^{-(p-1)/2}
   \Gamma\left( \frac{3p+19}{12} \right)
   \Gamma\left( \frac{3p-1}{12} \right) \\
 \end{empheq}
 ここで, 
 \( r_e = e^2/(m_e c^2) \)は古典電子半径である.
-また, \( f = eB,\, E_{\mathrm{res}} = m_e c^2,\, \lambda = c/\nu\)
-とおいた.
 
-\subsection{SSAの吸収係数}
+観測されるflux~$F_\nu$は
+\begin{equation}
+  F_\nu \approx
+  P_\nu \lsh(\rsh/d)^{2}
+  =
+  \SI{1.2e-9}{cm}~P_\nu
+\end{equation}
+と表せる.
+
+\subsection{Optically thick領域からの放射}
 エネルギー$E$あたりの電子の密度分布\( N(E) \)は以下に従うと仮定する.
 \begin{equation}
   \dv{N(E)}{E} = \tilde{N}_0 E^{-p}
 \end{equation}
-\( \gamma = E/(m_e c^2) \)なので,
-$\tilde{N}_0$と$N_0$とは以下の関係がある:
+\( \gamma = E/(m_e c^2) \)ゆえ,
+$\tilde{N}_0$と$N_0$とは以下の関係にある:
 \begin{equation}\label{eq:powerlaw_convert_NE_Ngamma}
   \tilde{N}_0 = (m_e c^2)^{p-1} N_0
 \end{equation}
@@ -492,5 +499,9 @@ Optical depth~$\tau_\nu$は
     \Gamma\left( \frac{3p+22}{12} \right)
   \right)^{2/(p+4)}
   \left( \frac{3eB}{2\pi(m_e c^2)^3} \right)^{p/(p+4)}
+\end{equation}
+値を代入すると
+\begin{equation}
+  \nu_0 = \SI{1.4e2}{GHz}
 \end{equation}
 \end{document}
