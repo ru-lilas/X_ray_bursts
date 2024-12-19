@@ -1,4 +1,5 @@
-from calc_SSA_spectrum import plt,FONTSIZE_DEFAULT,RED
+from parameter import *
+from calc_SSA_spectrum import plt,FONTSIZE_DEFAULT,RED,GREEN,BLUE,CYAN
 from calc_SSA_spectrum import nu_list_noSSA, nu_list_opthick
 from calc_SSA_spectrum import flux_noSSA, flux_SSA 
 
@@ -19,5 +20,10 @@ ax.plot( \
     [F.value for F in flux_noSSA], \
     ls='-', lw=3, color=RED)
 
+FILENAME = \
+    './output/SSA_plt' \
+    f'-p{int(p*10):02}' \
+    f'-h{int(eta*100):03}' \
+    '.png'
 
-plt.savefig('./output/SSA_plt.png', bbox_inches='tight')
+plt.savefig(FILENAME, bbox_inches='tight')
