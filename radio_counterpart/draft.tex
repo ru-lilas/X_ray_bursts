@@ -376,21 +376,15 @@ shockはそのエネルギーの一部を周囲の電子へ受け渡す. 効率�
 \end{empheq}
 
 \subsection{Optically thin領域からの放射}
-分布が\eqref{eq:powerlaw_gamma}で与えられる電子のシンクロトロン放射スペクトルは
+分布\eqref{eq:powerlaw_gamma}に従うシンクロトロン電子のpowerは
 以下で与えられる(Rybicki \& Lightman, 1979):
 \begin{empheq}{align}
   P_{\nu} 
   &= 
-  \frac{\sqrt{3}e^3N_0B}{m_ec^2(p+1)}
-  \Gamma\left( \frac{p}{4} + \frac{19}{12} \right)
-  \Gamma\left( \frac{p}{4} - \frac{1}{12} \right)
-  \left( \frac{2\pi\nu m_ec}{3eB} \right)^{-(p-1)/2} \\
-  &=
-  \frac{eB\hbar c}{m_e c^2}
-  \left( \frac{2\pi m_e c^2 \nu}{3eBc} \right)^{-(p-1)/2}
-  \frac{\sqrt{3}\alpha N_0}{p+1}
+  \frac{\sqrt{3} e^3 N_0 B}{m_e c^2 (p+1)}
   \Gamma\left( \frac{3p+19}{12} \right)
-  \Gamma\left( \frac{3p-1}{12} \right) \\
+  \Gamma\left( \frac{3p-1}{12} \right)
+  \left( \frac{2\pi\nu m_ec}{3eB} \right)^{-(p-1)/2} \\
   &=
   \frac{\sqrt{3}N_0 r_e eB}{p+1}
   \left( \frac{2\pi (m_e c^2)(\nu/c)}{3eB} \right)^{-(p-1)/2}
@@ -398,63 +392,79 @@ shockはそのエネルギーの一部を周囲の電子へ受け渡す. 効率�
   \Gamma\left( \frac{3p-1}{12} \right) \\
 \end{empheq}
 ここで, 
-\( r_e = e^2/(m_e c^2) \)は古典電子半径である.
+\( r_e = e^2/(m_e c^2) \)は古典電子半径.
 
-\( p = 2.5 \)の場合で具体的に計算する.
-$P_\nu$は
-\begin{empheq}{align}
+\( p = 2.5 \)の場合で具体的に計算すると,
+\begin{equation}
   P_\nu
-  &=
-  \frac{2\sqrt{3}}{7} N_0 c^{3/4} e^{7/4}
-  \left( \frac{3}{2\pi me_e c^2} \right)^{3/4}
+  =
+  \SI{4.2e-14}{erg.cm^{-3}.s^{-1}.Hz^{-1}}~
+  {B_{28}}^{7/4}~
+  {\nu_{100}}^{-3/4}~
+  \left( \frac{N_0}{\SI{1.1e9}{cm^{-3}}} \right)
+\end{equation}
+
+次に, Intensity~$I_\nu$は
+\begin{equation}
+  I_\nu
+  \approx
+  \frac{P_\nu \lsh}{4\pi}
+  =
+  \frac{\sqrt{3}N_0 r_e eB \lsh}{4\pi(p+1)}
+  \left( \frac{2\pi (m_e c^2)(\nu/c)}{3eB} \right)^{-(p-1)/2}
   \Gamma\left( \frac{3p+19}{12} \right)
-  \Gamma\left( \frac{3p-1}{12} \right)
-  B^{7/4}
-  \nu^{-3/4}\\
-  &=
-  \SI{2.4e-13}{erg.cm^{-3}}~
+  \Gamma\left( \frac{3p-1}{12} \right) \\
+\end{equation}
+と表せる. \( p=2.5 \)の場合で具体的に計算すると,
+\begin{equation}
+  I_\nu
+  =
+  \SI{3.0e-4}{erg.cm^{-2}.s^{-1}.Hz^{-1}.str^{-1}}~
   {B_{28}}^{7/4}~
-  {\nu_{100}}^{-3/4}~
-  % \left( \frac{B}{\SI{28}{G}} \right)^{7/4}
+  {\nu_{100}}^{-3/4}
+  \left( \frac{\lsh}{\SI{9e10}{cm}} \right)^{4/13}
   \left( \frac{N_0}{\SI{1.1e9}{cm^{-3}}} \right)
-  % \left( \frac{\nu}{\SI{10}{GHz}} \right)^{-3/4}
-\end{empheq}
-観測されるflux~$F_\nu$は
-\begin{empheq}{align}
-  F_\nu 
-  &\approx
-  P_\nu \lsh(\rsh/d)^{2} \\
-  &=
-  \SI{5.1e-23}{erg.cm^{-2}}~
-  {B_{28}}^{7/4}~
-  {\nu_{100}}^{-3/4}~
-  {d_{4.5}}^{-2}
-  % \left( \frac{B}{\SI{28}{G}} \right)^{7/4}
-  \left( \frac{N_0}{\SI{1.1e9}{cm^{-3}}} \right)
-  % \left( \frac{\nu}{\SI{100}{GHz}} \right)^{-3/4}
-  \left( \frac{\lsh}{\SI{9e10}{cm}} \right)
-  \left( \frac{\rsh}{\SI{1.6e12}{cm}} \right)^2
-  % \left( \frac{d}{\SI{4.5}{kpc}} \right)^{-2}
-  \\
-  &=
-  \SI{5.1e3}{mJy}~
-  {B_{28}}^{7/4}~
-  {\nu_{100}}^{-3/4}~
-  {d_{4.5}}^{-2}
-  % \left( \frac{B}{\SI{28}{G}} \right)^{7/4}
-  \left( \frac{N_0}{\SI{1.1e9}{cm^{-3}}} \right)
-  % \left( \frac{\nu}{\SI{100}{GHz}} \right)^{-3/4}
-  \left( \frac{\lsh}{\SI{9e10}{cm}} \right)
-  \left( \frac{\rsh}{\SI{1.6e12}{cm}} \right)^2
-  % \left( \frac{d}{\SI{4.5}{kpc}} \right)^{-2}
-\end{empheq}
-となる.
-ただし, 
-\(
-{B_{28}} = B/(\SI{28}{G}),\, 
-\nu_{100} = \nu/(\SI{100}{GHz}),\,
-d_{4.5} = d/(\SI{4.5}{kpc})
-\).
+\end{equation}
+
+% 観測されるflux~$F_\nu$は
+% \begin{empheq}{align}
+%   F_\nu 
+%   &\approx
+%   P_\nu \lsh(\rsh/d)^{2} \\
+%   &=
+%   \SI{5.1e-23}{erg.cm^{-2}}~
+%   (\sin\alpha)^{7/4}
+%   {B_{28}}^{7/4}~
+%   {\nu_{100}}^{-3/4}~
+%   {d_{4.5}}^{-2}
+%   % \left( \frac{B}{\SI{28}{G}} \right)^{7/4}
+%   \left( \frac{N_0}{\SI{1.1e9}{cm^{-3}}} \right)
+%   % \left( \frac{\nu}{\SI{100}{GHz}} \right)^{-3/4}
+%   \left( \frac{\lsh}{\SI{9e10}{cm}} \right)
+%   \left( \frac{\rsh}{\SI{1.6e12}{cm}} \right)^2
+%   % \left( \frac{d}{\SI{4.5}{kpc}} \right)^{-2}
+%   \\
+%   &=
+%   \SI{5.1e3}{mJy}~
+%   B_{28}^{7/4}~
+%   \nu_{100}^{-3/4}~
+%   d_{4.5}^{-2}~
+%   % N_{0,11}
+%   % \left( \frac{B}{\SI{28}{G}} \right)^{7/4}
+%   \left( \frac{N_0}{\SI{1.1e9}{cm^{-3}}} \right)
+%   % \left( \frac{\nu}{\SI{100}{GHz}} \right)^{-3/4}
+%   \left( \frac{\lsh}{\SI{9e10}{cm}} \right)
+%   \left( \frac{\rsh}{\SI{1.6e12}{cm}} \right)^2
+%   % \left( \frac{d}{\SI{4.5}{kpc}} \right)^{-2}
+% \end{empheq}
+% となる.
+% ただし, 
+% \(
+% {B_{28}} = B/(\SI{28}{G}),\, 
+% \nu_{100} = \nu/(\SI{100}{GHz}),\,
+% d_{4.5} = d/(\SI{4.5}{kpc}),\,
+% N_{0,}
+% \).
 
 \subsection{Optically thick領域からの放射}
 エネルギー$E$あたりの電子の密度分布\( N(E) \)は以下に従うと仮定する.
