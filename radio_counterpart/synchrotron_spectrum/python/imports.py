@@ -14,6 +14,10 @@ import numpy as np
 
 FONTSIZE_DEFAULT = 18
 OUTPUT_DIR = './' # output file's path
+RED = '#FF4B00'
+GREEN = '#03AF7A'
+BLUE = '#005AFF'
+CYAN = '#4DC4FF'
 
 # physical and mathematical constants
 PI = np.pi
@@ -28,3 +32,4 @@ m_p = const.m_p.cgs
 m_u = const.u.cgs
 mc2 = (m_e*c**2).to(u.erg)
 sigma_T = const.sigma_T.cgs
+r_e = (e**2 / mc2).to(u.cm)
