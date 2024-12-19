@@ -345,7 +345,7 @@ $\gamma_\mathrm{min}$のシンクロトロン放射しているならば,
 電子分布はpower lawに従うとする.
 \begin{equation}
   \label{eq:powerlaw_gamma}
-  \dv{N}{\gamma} = N_0\gamma^{-p}\quad(\gamma_\mathrm{min} < \gamma < \gamma_\mathrm{max})
+  N(\gamma) = N_0\gamma^{-p}\quad(\gamma_\mathrm{min} < \gamma < \gamma_\mathrm{max})
 \end{equation}
 ここで$N_0$は数密度の次元をもつ定数である.
 
@@ -399,14 +399,61 @@ shockはそのエネルギーの一部を周囲の電子へ受け渡す. 効率�
 ここで, 
 \( r_e = e^2/(m_e c^2) \)は古典電子半径である.
 
+\( p = 2.5 \)の場合で具体的に計算する.
+$P_\nu$は
+\begin{empheq}{align}
+  P_\nu
+  &=
+  \frac{2\sqrt{3}}{7} N_0 c^{3/4} e^{7/4}
+  \left( \frac{3}{2\pi me_e c^2} \right)^{3/4}
+  \Gamma\left( \frac{3p+19}{12} \right)
+  \Gamma\left( \frac{3p-1}{12} \right)
+  B^{7/4}
+  \nu^{-3/4}\\
+  &=
+  \SI{2.4e-13}{erg.cm^{-3}}~
+  {B_{28}}^{7/4}~
+  {\nu_{100}}^{-3/4}~
+  % \left( \frac{B}{\SI{28}{G}} \right)^{7/4}
+  \left( \frac{N_0}{\SI{1.1e9}{cm^{-3}}} \right)
+  % \left( \frac{\nu}{\SI{10}{GHz}} \right)^{-3/4}
+\end{empheq}
 観測されるflux~$F_\nu$は
-\begin{equation}
-  F_\nu \approx
-  P_\nu \lsh(\rsh/d)^{2}
-  =
-  \SI{1.2e-9}{cm}~P_\nu
-\end{equation}
-と表せる.
+\begin{empheq}{align}
+  F_\nu 
+  &\approx
+  P_\nu \lsh(\rsh/d)^{2} \\
+  &=
+  \SI{5.1e-23}{erg.cm^{-2}}~
+  {B_{28}}^{7/4}~
+  {\nu_{100}}^{-3/4}~
+  {d_{4.5}}^{-2}
+  % \left( \frac{B}{\SI{28}{G}} \right)^{7/4}
+  \left( \frac{N_0}{\SI{1.1e9}{cm^{-3}}} \right)
+  % \left( \frac{\nu}{\SI{100}{GHz}} \right)^{-3/4}
+  \left( \frac{\lsh}{\SI{9e10}{cm}} \right)
+  \left( \frac{\rsh}{\SI{1.6e12}{cm}} \right)^2
+  % \left( \frac{d}{\SI{4.5}{kpc}} \right)^{-2}
+  \\
+  &=
+  \SI{5.1e3}{mJy}~
+  {B_{28}}^{7/4}~
+  {\nu_{100}}^{-3/4}~
+  {d_{4.5}}^{-2}
+  % \left( \frac{B}{\SI{28}{G}} \right)^{7/4}
+  \left( \frac{N_0}{\SI{1.1e9}{cm^{-3}}} \right)
+  % \left( \frac{\nu}{\SI{100}{GHz}} \right)^{-3/4}
+  \left( \frac{\lsh}{\SI{9e10}{cm}} \right)
+  \left( \frac{\rsh}{\SI{1.6e12}{cm}} \right)^2
+  % \left( \frac{d}{\SI{4.5}{kpc}} \right)^{-2}
+\end{empheq}
+となる.
+ただし, 
+\(
+{B_{28}} = B/(\SI{28}{G}),\, 
+\nu_{100} = \nu/(\SI{100}{GHz}),\,
+d_{4.5} = d/(\SI{4.5}{kpc})
+\).
 
 \subsection{Optically thick領域からの放射}
 エネルギー$E$あたりの電子の密度分布\( N(E) \)は以下に従うと仮定する.
@@ -419,7 +466,7 @@ $\tilde{N}_0$と$N_0$とは以下の関係にある:
   \tilde{N}_0 = (m_e c^2)^{p-1} N_0
 \end{equation}
 
-synchrotron self--absorptionの
+Synchrotron self--absorption(SSA)の
 吸収係数は以下で与えられる(Rybicki \& Lightman, 1979).
 \begin{empheq}{align}
   \alpha_\nu
@@ -430,19 +477,27 @@ synchrotron self--absorptionの
   \Gamma\left( \frac{3p+22}{12} \right)
   \nu^{-(p+4)/2} \\
   &=
-  \frac{\sqrt{3}\tilde{N}_0 r_e}{8\pi}
-  eB\left( \frac{c}{\nu} \right)^2
+  \frac{\sqrt{3}\tilde{N}_0 r_e eB}{8\pi}
+  \left( \frac{c}{\nu} \right)^2
   \left( \frac{3}{2\pi}\frac{eB}{(m_e c^2)^3}
   \frac{c}{\nu} \right)^{p/2}
   \Gamma\left( \frac{3p+2}{12} \right)
   \Gamma\left( \frac{3p+22}{12} \right) \\
   &=
-  \frac{\sqrt{3}{E_\mathrm{res}}^{p-1}N_0 r_e f}{8\pi \lambda^{-2}}
-  \left( \frac{3f}{2\pi E_{\mathrm{res}}^3 \lambda^{-1}} \right)^{p/2}
+  \frac{\sqrt{3}}{8\pi}\frac{N_0 r_e eB}{m_e c^2(\nu/c)^2}
+  \left( \frac{3eB}{2\pi (m_e c^2)^ (\nu/c)} \right)^{p/2}
   \Gamma\left( \frac{3p+2}{12} \right)
   \Gamma\left( \frac{3p+22}{12} \right)
 \end{empheq}
 最後の等式で\eqref{eq:powerlaw_convert_NE_Ngamma}を用いた.
+\( p = 2.5\)として計算すると
+\begin{equation}
+  \alpha_\nu
+  =
+  \SI{4.4e-7}{cm^{-1}}~
+  {B_{28}}^{9/4}~
+  {\nu_{100}}^{-13/4}
+\end{equation}
 
 源泉関数は
 \begin{empheq}{align}
@@ -494,14 +549,14 @@ Optical depth~$\tau_\nu$は
   \nu_0/c
   =
   \left( 
-    \frac{\sqrt{3} (m_e c^2)^{p-1} N_0 r_e eB \lsh}{8\pi}
+    \frac{\sqrt{3}N_0 r_e eB \lsh}{8\pi m_e c^2}
     \Gamma\left( \frac{3p+2}{12} \right)
     \Gamma\left( \frac{3p+22}{12} \right)
   \right)^{2/(p+4)}
-  \left( \frac{3eB}{2\pi(m_e c^2)^3} \right)^{p/(p+4)}
+  \left( \frac{3eB}{2\pi m_e c^2} \right)^{p/(p+4)}
 \end{equation}
 値を代入すると
 \begin{equation}
-  \nu_0 = \SI{1.4e2}{GHz}
+  \nu_0 = \SI{140}{GHz}
 \end{equation}
 \end{document}
