@@ -45,10 +45,29 @@ ax.plot( \
     color=RED
 )
 
+ax.plot( \
+    band90,
+    flux90,
+    ls='',
+    marker='o',
+    label='9.0 GHz'
+    )
+
+ax.plot( \
+    band55,
+    flux55,
+    ls='',
+    marker='o',
+    label='5.5 GHz'
+    )
+
 FILENAME = \
     './output/plt_flux' \
     f'-p{int(p*10):02}' \
     f'-h{int(eta*100):03}' \
+    f'-epse{int(eps_e*100):03}'\
     '.png'
 
+plt.legend()
 plt.savefig(FILENAME, bbox_inches='tight')
+print(f'{FILENAME} was generated.')
