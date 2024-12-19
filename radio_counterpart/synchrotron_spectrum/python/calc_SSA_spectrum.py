@@ -61,27 +61,32 @@ print(
     f'S_crit = {S_crit:.2g}\n'
     )
 
+# making dataframe
+nu_min = 1.0*u.GHz
+nu_max = 1000*u.GHz
+nu_full:list = np.linspace(nu_min,nu_max,1000)
+
+intensity:list = [ \
+    calc_intensity(p,B,N0,l_sh,nu) \
+    for nu in nu_full \
+    ]
+source_func:list = [ \
+    calc_SSA_source_function(p,B,nu) \
+    for nu in nu_full \
+    ]
+
+df = pd.DataFrame({
+    'nu':nu_full,
+    'I':intensity,
+    'S':source_func
+})
+
+print(df)
 
 # def calc_noSSA_flux(P,r_sh,l_sh,d):
 #     # print(f'F/P = {(l_sh*(r_sh/d)**2).to(u.cm)}')
 #     val = P*l_sh*(r_sh/d)**2
 #     return val.to(u.mJy)
-
-
-# # Source function
-# def calc_SSA_source(p,nu,B):
-#     f  = (e*B).to(u.erg/u.cm)
-#     x = nu/c
-
-#     # G:ratio of gamma functions
-#     G = \
-#         ( gamma((3*p+19)/12)*gamma((3*p-1)/12) ) \
-#         *( gamma((3*p+2)/12) *gamma((3*p+22)/12) )
-#     val = \
-#     (2*x**2*mc2) / (p+1) \
-#     *np.sqrt(2*PI*mc2*x/(3*f)) \
-#     *G
-#     return val.to(u.erg*u.cm**(-2))
 
 # # source flux
 # def calc_SSA_source(p,nu,B):
