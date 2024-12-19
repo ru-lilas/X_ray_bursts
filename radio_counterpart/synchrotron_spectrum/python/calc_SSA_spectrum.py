@@ -49,156 +49,99 @@ def calc_SSA_source_function(p,B,nu):
         *G
     return val
 
+# optical depth
+def calc_tau(p,B,N0,lsh,nu):
+    a = calc_alpha(p,B,N0,nu)
+    return a*lsh
+
+# SSA frequency
+def calc_nu_SSA(p,B,N0,lsh):
+    eB  = (e*B).to(u.erg/u.cm)
+    g1  = gamma((3*p+2)/12)
+    g2  = gamma((3*p+22)/12)
+    val = \
+        ((np.sqrt(3) * N0 * r_e * eB *lsh * g1 * g2) / (8*PI*mc2))**(2/(p+4)) \
+        *((3*eB) / (2*PI*mc2))**(p/(p+4)) \
+        *c
+    return val.to(u.GHz)
+
+# converting intensity into flux at observer
+def convert_into_flux(I,r,d):
+    Omega = (r/d)**2 # solid angle
+    return (I*Omega).to(u.mJy)
+
 nu_sample   = 100*u.GHz
 P_crit      = calc_power(p,B,N0,nu_sample)
 I_crit      = calc_intensity(p,B,N0,l_sh,nu_sample)
 alpha_crit  = calc_alpha(p,B,N0,nu_sample)
 S_crit      = calc_SSA_source_function(p,B,nu_sample)
+nu_SSA      = calc_nu_SSA(p,B,N0,l_sh)
 print(
     f'P_crit = {P_crit:.2g}\n'
     f'I_crit = {I_crit:.2g}\n'
     f'a_crit = {alpha_crit:.2g}\n'
     f'S_crit = {S_crit:.2g}\n'
+    f'nu_SSA = {nu_SSA:.2g}'
     )
 
 # making dataframe
 nu_min = 1.0*u.GHz
 nu_max = 1000*u.GHz
-nu_full:list = np.linspace(nu_min,nu_max,1000)
+nu_full:list    = np.linspace(nu_min,nu_max,1000)
+nu_thick:list   = np.linspace(nu_min,nu_SSA,500)
+nu_thin:list    = np.linspace(nu_SSA,nu_max,500)
+
+mask_thick  = nu_full < nu_SSA
+mask_thin   = nu_full > nu_SSA
 
 intensity:list = [ \
-    calc_intensity(p,B,N0,l_sh,nu) \
-    for nu in nu_full \
+    calc_intensity(p,B,N0,l_sh,nu).to(u.mJy) \
+    for nu in nu_full[mask_thin] \
+    ]
+intensity_dashed:list = [ \
+    calc_intensity(p,B,N0,l_sh,nu).to(u.mJy) \
+    for nu in nu_full[mask_thick] \
     ]
 source_func:list = [ \
-    calc_SSA_source_function(p,B,nu) \
-    for nu in nu_full \
+    calc_SSA_source_function(p,B,nu).to(u.mJy) \
+    for nu in nu_full[mask_thick] \
     ]
+flux_thin:list = [ \
+    convert_into_flux(I,r_sh,d) \
+    for I in intensity \
+    ]
+flux_dashed:list = [ \
+    convert_into_flux(I,r_sh,d) \
+    for I in intensity_dashed \
+    ]
+flux_thick:list = [ \
+    convert_into_flux(I,r_sh,d) \
+    for I in source_func \
+    ]
+optical_depth:list = [ \
+    calc_tau(p,B,N0,l_sh,nu) \
+    for nu in nu_full
+]
 
-df = pd.DataFrame({
-    'nu':nu_full,
-    'I':intensity,
+df_flux_thick   = pd.DataFrame({
+    'nu':nu_full[mask_thick],
+    'F' :flux_thick
+})
+df_flux_thin    = pd.DataFrame({
+    'nu':nu_full[mask_thin],
+    'F' :flux_thin
+})
+df_flux_dashed  = pd.DataFrame({
+    'nu':nu_full[mask_thick],
+    'F' :flux_dashed
+})
+
+df_thick = pd.DataFrame({
+    'nu':nu_full[mask_thick],
     'S':source_func
 })
 
-print(df)
-
-# def calc_noSSA_flux(P,r_sh,l_sh,d):
-#     # print(f'F/P = {(l_sh*(r_sh/d)**2).to(u.cm)}')
-#     val = P*l_sh*(r_sh/d)**2
-#     return val.to(u.mJy)
-
-# # source flux
-# def calc_SSA_source(p,nu,B):
-#     f  = (e*B).to(u.erg/u.cm)
-#     x = nu/c
-
-#     # G:ratio of gamma functions
-#     G = \
-#         ( gamma((3*p+19)/12)*gamma((3*p-1)/12) ) \
-#         *( gamma((3*p+2)/12) *gamma((3*p+22)/12) )
-#     val = \
-#     (8*PI*x**2*mc2) / (p+1) \
-#     *np.sqrt(2*PI*mc2*x/(3*f)) \
-#     *G
-#     return val.to(u.erg*u.cm**(-2))
-# def calc_SSA_flux(S,r_sh,d):
-#     return (S*(r_sh/d)**2).to(u.mJy)
-
-
-# #  the frequency at (Optical depth) = 1
-# def calc_nu0(p,N0,B,l_sh):
-#     eB = (e*B).to(u.erg/u.cm)
-#     r_e = (e**2 / (mc2)).to(u.cm)
-#     G = \
-#         ( gamma((3*p+19)/12)*gamma((3*p-1)/12) )
-#     val = \
-#         ((N0*eB*l_sh*np.sqrt(3)*r_e*G) / (8*PI*mc2))**(2/(p+4)) \
-#         *((3*eB)/(2*PI*mc2))**(p/(p+4)) \
-#         *c
-#     return val.to(u.GHz)
-
-# def calc_tau(p,N0,B,l_sh,nu):
-#     eB = (e*B).to(u.erg/u.cm)
-#     r_e = (e**2 / (mc2)).to(u.cm)
-#     G = \
-#         ( gamma((3*p+19)/12)*gamma((3*p-1)/12) )
-#     val = \
-#         (np.sqrt(3)*N0*r_e*eB*l_sh) / ((nu/c)**2*mc2) \
-#         *(3*eB/(2*PI*mc2*(nu/c)))**(p/2) \
-#         *G
-#     return val
-
-# def calc_decayfactor(tau):
-#     return (1-np.exp(-tau))
-
-# def calc_pow_decayed(p,N0,B,l_sh,nu):
-#     P = calc_spectrum_pl(p,B,N0,nu)
-#     tau = calc_tau(p,N0,B,l_sh,nu)
-#     f = calc_decayfactor(tau)
-#     return P*f
-
-# nu_a = calc_nu0(p,N0,B,l_sh) # SSA frequency
-
-# # calculate more concrete case
-# nu_sample = 1000*u.GHz
-
-# P_crit      = calc_spectrum_pl(p,B,N0,nu_sample)
-# F_crit      = calc_noSSA_flux(P_crit,r_sh,l_sh,d)
-# alpha_crit  = calc_SSA_alpha(p,B,N0,nu_sample)
-# tau_crit    = calc_tau(p,N0,B,l_sh,nu_sample)
-# decay_crit  = calc_decayfactor(tau_crit)
-# P_crit_dec  = P_crit*decay_crit
-# F_crit_dec  = calc_noSSA_flux(P_crit_dec,r_sh,l_sh,d)
-# S_crit      = calc_SSA_source(p,nu_sample,B)
-# F_crit_SSA  = calc_SSA_flux(S_crit,r_sh,d)
-# print(
-#     f'P_crit = {P_crit:.2g} \n' \
-#     f'P_crit_decayed = {P_crit_dec:.2g} \n'
-#     f'F_crit = {(F_crit):.2g} = {(F_crit.to(u.erg/u.cm**2)):.2g}\n'
-#     f'F_crit_decayed = {F_crit_dec:.2g} = {(F_crit_dec.to(u.erg/u.cm**2)):.2g}\n'
-#     f'alpha_nu = {alpha_crit:.2g} \n'
-#     f'S_crit = {S_crit:.2g} \n'
-#     f'F_crit(SSA) = {F_crit_SSA:.2g}'
-#     )
-
-# print(f'nu_a = {nu_a:.2g}')
-
-# # nu_min  = e*B*gamma_min**2 / (2*PI*m_e*c) # frequency at minimum Lorentz factor
-# nu_min = 1*u.GHz
-# nu_max  = 1000 *u.GHz # arbitrary value
-
-# nu_SSA \
-# = np.linspace(nu_min, nu_a, 100) # frequency list
-# nu_noSSA \
-# = np.linspace(nu_a,nu_max,100) # frequency list
-# nu_full \
-# = np.linspace(nu_min,nu_max,100)
-
-# # source_noSSA:list   = \
-# # [
-# #     calc_spectrum_pl(p,B,N0,nu)*calc_decayfactor(calc_tau(p,N0,B,l_sh,nu)) \
-# #     / calc_SSA_alpha(p,B,N0,nu) \
-# #     for nu in nu_noSSA
-# # ]
-# flux_source:list = [calc_spectrum_pl(p,B,N0,nu)/calc_SSA_alpha(p,B,N0,nu) for nu in nu_full]
-# # flux_source_SSA:list = [4*PI*calc_SSA_source(p,nu,B)*calc_decayfactor(calc_tau(p,N0,B,l_sh,nu)) for nu in nu_noSSA]
-# flux_source_SSA:list = [calc_spectrum_pl(p,B,N0,nu)*calc_decayfactor(calc_tau(p,N0,B,l_sh,nu))/calc_SSA_alpha(p,B,N0,nu) for nu in nu_noSSA]
-# flux_Pl:list = [4*PI*calc_SSA_source(p,nu,B)*calc_SSA_alpha(p,B,N0,nu)*l_sh for nu in nu_noSSA]
-
-# # power_noSSA_nodecay:list    = [calc_spectrum_pl(p,B,N0,nu) for nu in nu_noSSA]
-# # power_noSSA:list    = [calc_pow_decayed(p,N0,B,l_sh,nu) for nu in nu_noSSA]
-# # intensity_noSSA_nodecay:list = [P*l_sh for P in power_noSSA_nodecay]
-# # df = pd.DataFrame({'nu':nu_noSSA, 'I':intensity_noSSA_nodecay})
-# # print(df)
-# # flux_noSSA_nodecay:list     = [calc_noSSA_flux(P,r_sh,l_sh,d) for P in power_noSSA_nodecay]
-# # flux_noSSA:list     = [calc_noSSA_flux(P,r_sh,l_sh,d) for P in power_noSSA]
-# # source_noSSA:list   = [calc_SSA_source(p,nu,B)*calc_decayfactor(calc_tau(p,N0,B,l_sh,nu)) for nu in nu_noSSA]
-
-# # source_SSA:list     = [calc_SSA_source(p,nu,B) for nu in nu_SSA]
-# # flux_SSA:list       = [calc_SSA_flux(S,r_sh,d) for S in source_SSA]
-
-# # df_noSSA    = pd.DataFrame({'nu':nu_noSSA, 'flux':flux_noSSA})
-# # df_SSA      = pd.DataFrame({'nu':nu_SSA, 'flux':flux_SSA})
-
-# # print(df_noSSA)
+df_thin = pd.DataFrame({
+    'nu':nu_full[mask_thin],
+    'I':intensity
+})
