@@ -525,13 +525,25 @@ Synchrotron self--absorption(SSA)の
   \Gamma\left( \frac{3p+22}{12} \right)
   }
 \end{equation}
-である.
+である. \( p=2.5 \)として計算すると
+\begin{equation}
+  S_\nu
+  =
+  \SI{2.9e-4}{erg.cm^{-2}}~
+  {B_{28}}^{-1/2}~
+  {\nu_{100}}^{5/2}
+\end{equation}
 
 天体までの距離\( d = \SI{4.5}{kpc} \)とすると, 観測されるflux~$F_\nu$は
 \begin{equation}
   F_\nu
   \approx S_\nu\left( \frac{\rsh^2}{d^2} \right)
-  \approx \num{1.4e-20}S_\nu
+  \approx
+  \SI{400}{mJy}~
+  {B_{28}}^{-1/2}~
+  {\nu_{100}}^{5/2}~
+  {d_{4.5}}^{-2}~
+  \left( \frac{\rsh}{\SI{1.6e12}{cm}} \right)^2
 \end{equation}
 となる.
 
@@ -545,9 +557,10 @@ Optical depth~$\tau_\nu$は
     \Gamma\left( \frac{3p+2}{12} \right)
     \Gamma\left( \frac{3p+22}{12} \right)
 \end{equation}
-とかける. \( \tau = 1 \)のときの周波数$\nu_0$を求めると
+とかける. \( \tau = 1 \)のときの周波数
+$\nu_\mathrm{SSA}$を求めると
 \begin{equation}
-  \nu_0/c
+  {\nu_\mathrm{SSA}}/c
   =
   \left( 
     \frac{\sqrt{3}N_0 r_e eB \lsh}{8\pi m_e c^2}
@@ -556,8 +569,12 @@ Optical depth~$\tau_\nu$は
   \right)^{2/(p+4)}
   \left( \frac{3eB}{2\pi m_e c^2} \right)^{p/(p+4)}
 \end{equation}
-値を代入すると
+である. \( p=2.5 \)として具体的に計算すると
 \begin{equation}
-  \nu_0 = \SI{140}{GHz}
+  \nu_\mathrm{SSA} =
+  \SI{140}{GHz}~
+  {B_{28}}^{9/13}~
+  \left( \frac{\lsh}{\SI{9e10}{cm}} \right)^{4/13}
+  \left( \frac{N_0}{\SI{1.1e9}{cm^{-3}}} \right)^{4/13} 
 \end{equation}
 \end{document}
