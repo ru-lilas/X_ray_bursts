@@ -63,6 +63,19 @@ def calc_nu0(p,N0,B,l_sh):
         *((3*eB)/(2*PI*mc2))**(p/(p+4)) \
         *c
     return val.to(u.GHz)
+
+def calc_tau(p,N0,B,l_sh,nu):
+    eB = (e*B).to(u.erg/u.cm)
+    r_e = (e**2 / (mc2)).to(u.cm)
+    G = \
+        ( gamma((3*p+19)/12)*gamma((3*p-1)/12) )
+    val = \
+        (np.sqrt(3)*N0*r_e*eB*l_sh) / ((nu/c)**2*mc2) \
+        *(3*eB/(2*PI*mc2*(nu/c)))**(p/2) \
+        *G
+    return val
+    
+
 nu_a = calc_nu0(p,N0,B,l_sh) # SSA frequency
 
 # calculate more concrete case
